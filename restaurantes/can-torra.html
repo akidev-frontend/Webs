@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Can Torra — Cuina de la Terra</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Variables ─────────────────────────────────────────── */
+    :root {
+      --crema:      #f5efe6;
+      --crema-dark: #ede3d3;
+      --terracota:  #b85c38;
+      --terracota-light: #d4794f;
+      --oliva:      #4a5240;
+      --oliva-light:#6b7359;
+      --marron:     #3d2b1f;
+      --text:       #2c1f14;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans:  'Jost', sans-serif;
+    }
+
+    /* ─── Reset & Base ──────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background-color: var(--crema);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* Grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: .028;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
+    /* ─── Keyframes ─────────────────────────────────────────── */
+    @keyframes fadeUp   { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeIn   { from { opacity:0; }                             to { opacity:1; } }
+    @keyframes lineGrow { from { width:0; }                               to { width:100%; } }
+    @keyframes float    { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-6px); } }
+
+    /* ─── Nav ───────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 4vw;
+      background: rgba(245,239,230,.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(184,92,56,.15);
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+      color: var(--marron);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--terracota); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--sans);
+      font-size: .78rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--oliva);
+      text-decoration: none;
+      transition: color .3s;
+    }
+    .nav-links a:hover { color: var(--terracota); }
+
+    .nav-reserva {
+      font-family: var(--sans);
+      font-size: .75rem;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--crema);
+      background: var(--terracota);
+      padding: .55rem 1.4rem;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background .3s;
+    }
+    .nav-reserva:hover { background: var(--marron); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--marron);
+      transition: all .3s;
+    }
+
+    /* Mobile menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--crema);
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .4s;
+    }
+    .mobile-menu.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .mobile-menu a {
+      font-family: var(--serif);
+      font-size: 2rem;
+      color: var(--marron);
+      text-decoration: none;
+      font-style: italic;
+    }
+    .mobile-menu-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 4vw;
+      background: none;
+      border: none;
+      font-size: 2rem;
+      color: var(--marron);
+      cursor: pointer;
+    }
+
+    /* ─── Hero ──────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 12rem 6vw 6rem 8vw;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-tag {
+      font-family: var(--sans);
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--terracota);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp .8s .2s forwards;
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(3.2rem, 5vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--marron);
+      margin-bottom: 1.8rem;
+      opacity: 0;
+      animation: fadeUp .8s .4s forwards;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--terracota);
+    }
+
+    .hero-sub {
+      font-family: var(--sans);
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--oliva-light);
+      max-width: 380px;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeUp .8s .6s forwards;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: .8rem;
+      font-family: var(--sans);
+      font-size: .8rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--crema);
+      background: var(--terracota);
+      padding: 1rem 2.2rem;
+      text-decoration: none;
+      transition: all .3s;
+      opacity: 0;
+      animation: fadeUp .8s .8s forwards;
+      width: fit-content;
+    }
+    .hero-cta:hover {
+      background: var(--marron);
+      gap: 1.2rem;
+    }
+    .hero-cta svg { transition: transform .3s; }
+    .hero-cta:hover svg { transform: translateX(4px); }
+
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-img-wrap {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      animation: fadeIn 1.2s .3s forwards;
+    }
+
+    .hero-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-img-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, var(--crema) 0%, transparent 30%);
+    }
+
+    .hero-badge {
+      position: absolute;
+      bottom: 3rem;
+      right: 3rem;
+      width: 120px;
+      height: 120px;
+      background: var(--terracota);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--crema);
+      text-align: center;
+      animation: float 4s ease-in-out infinite;
+      z-index: 3;
+    }
+    .hero-badge .badge-num  { font-family: var(--serif); font-size: 1.9rem; font-weight: 300; line-height: 1; }
+    .hero-badge .badge-text { font-family: var(--sans); font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; margin-top: .2rem; }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 8vw;
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      font-family: var(--sans);
+      font-size: .7rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--oliva-light);
+      opacity: 0;
+      animation: fadeIn 1s 1.2s forwards;
+    }
+    .hero-scroll::before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--terracota);
+    }
+
+    /* ─── Section Base ──────────────────────────────────────── */
+    section { position: relative; }
+
+    .section-label {
+      font-family: var(--sans);
+      font-size: .7rem;
+      font-weight: 500;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--terracota);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.2;
+      color: var(--marron);
+      margin-bottom: 1.5rem;
+    }
+    .section-title em { font-style: italic; }
+
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: var(--terracota);
+      margin-bottom: 3rem;
+    }
+
+    /* ─── Carta ─────────────────────────────────────────────── */
+    .carta {
+      padding: 8rem 8vw;
+      background: var(--crema-dark);
+    }
+
+    .carta-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: end;
+      margin-bottom: 5rem;
+    }
+
+    .carta-intro {
+      font-size: .95rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--oliva-light);
+      max-width: 380px;
+    }
+
+    .plats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+
+    .plat {
+      background: var(--crema);
+      padding: 2.8rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform .3s;
+    }
+    .plat:hover { transform: translateY(-4px); }
+
+    .plat::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      height: 3px;
+      width: 0;
+      background: var(--terracota);
+      transition: width .5s ease;
+    }
+    .plat:hover::before { width: 100%; }
+
+    .plat-num {
+      font-family: var(--serif);
+      font-size: 4rem;
+      font-weight: 300;
+      color: var(--crema-dark);
+      line-height: 1;
+      margin-bottom: .5rem;
+    }
+
+    .plat-name {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--marron);
+      margin-bottom: .5rem;
+      line-height: 1.2;
+    }
+    .plat-name em { font-style: italic; color: var(--terracota); }
+
+    .plat-desc {
+      font-size: .85rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--oliva-light);
+      margin-bottom: 1.5rem;
+    }
+
+    .plat-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .plat-price {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--terracota);
+    }
+
+    .plat-tag {
+      font-size: .65rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--oliva-light);
+      border: 1px solid currentColor;
+      padding: .25rem .6rem;
+    }
+
+    /* ─── Nosaltres ─────────────────────────────────────────── */
+    .nosaltres {
+      padding: 8rem 8vw;
+      display: grid;
+      grid-template-columns: 5fr 4fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .nosaltres-text .big-quote {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--marron);
+      margin-bottom: 2rem;
+    }
+
+    .nosaltres-text p {
+      font-size: .95rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--oliva-light);
+    }
+
+    .nosaltres-img {
+      position: relative;
+    }
+
+    .nosaltres-img img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .nosaltres-img::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      right: 20px;
+      bottom: 20px;
+      border: 2px solid var(--terracota);
+      z-index: -1;
+      opacity: .4;
+    }
+
+    /* ─── Galeria ────────────────────────────────────────────── */
+    .galeria {
+      padding: 6rem 8vw;
+      background: var(--oliva);
+    }
+
+    .galeria .section-label { color: var(--crema-dark); opacity: .7; }
+    .galeria .section-title { color: var(--crema); }
+    .galeria .divider { background: var(--terracota-light); }
+
+    .galeria-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 240px 240px;
+      gap: 3px;
+    }
+
+    .galeria-item {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .galeria-item:nth-child(1) { grid-column: 1 / 2; grid-row: 1 / 2; }
+    .galeria-item:nth-child(2) { grid-column: 2 / 3; grid-row: 1 / 3; }
+    .galeria-item:nth-child(3) { grid-column: 3 / 4; grid-row: 1 / 2; }
+    .galeria-item:nth-child(4) { grid-column: 1 / 2; grid-row: 2 / 3; }
+    .galeria-item:nth-child(5) { grid-column: 3 / 4; grid-row: 2 / 3; }
+    .galeria-item:nth-child(6) { display: none; }
+
+    .galeria-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .6s ease, filter .6s ease;
+      filter: saturate(.85);
+    }
+    .galeria-item:hover img {
+      transform: scale(1.06);
+      filter: saturate(1.1);
+    }
+
+    /* ─── Contacte ────────────────────────────────────────────── */
+    .contacte {
+      padding: 8rem 8vw;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+    }
+
+    .contacte-info .section-title { margin-bottom: 2.5rem; }
+
+    .info-block {
+      margin-bottom: 2rem;
+    }
+
+    .info-block h4 {
+      font-family: var(--sans);
+      font-size: .7rem;
+      font-weight: 500;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--terracota);
+      margin-bottom: .6rem;
+    }
+
+    .info-block p {
+      font-size: .95rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--oliva-light);
+    }
+
+    .horari-grid {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: .4rem 1.5rem;
+      font-size: .9rem;
+      font-weight: 300;
+      color: var(--oliva-light);
+    }
+    .horari-grid .dia { color: var(--marron); font-weight: 400; }
+    .horari-grid .tancat { color: var(--terracota); font-style: italic; }
+
+    .contacte-form-area {
+      background: var(--crema-dark);
+      padding: 3.5rem;
+      position: relative;
+    }
+
+    .contacte-form-area::before {
+      content: 'Reserva';
+      position: absolute;
+      top: -1px;
+      right: 3rem;
+      background: var(--terracota);
+      color: var(--crema);
+      font-family: var(--sans);
+      font-size: .65rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      padding: .3rem .9rem;
+    }
+
+    .form-title {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--marron);
+      margin-bottom: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.4rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: .7rem;
+      font-weight: 500;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--oliva-light);
+      margin-bottom: .5rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: .75rem 1rem;
+      background: var(--crema);
+      border: 1px solid rgba(74,82,64,.2);
+      font-family: var(--sans);
+      font-size: .9rem;
+      font-weight: 300;
+      color: var(--text);
+      outline: none;
+      transition: border-color .3s;
+      appearance: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--terracota);
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    .btn-enviar {
+      width: 100%;
+      padding: 1rem;
+      background: var(--marron);
+      color: var(--crema);
+      border: none;
+      font-family: var(--sans);
+      font-size: .78rem;
+      font-weight: 500;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .3s;
+      margin-top: .5rem;
+    }
+    .btn-enviar:hover { background: var(--terracota); }
+
+    /* ─── Footer ─────────────────────────────────────────────── */
+    footer {
+      background: var(--marron);
+      padding: 3rem 8vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--crema);
+      letter-spacing: .05em;
+    }
+    .footer-logo span { color: var(--terracota-light); font-style: italic; }
+
+    .footer-copy {
+      font-size: .78rem;
+      font-weight: 300;
+      color: rgba(245,239,230,.4);
+      letter-spacing: .05em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.8rem;
+      list-style: none;
+    }
+    .footer-links a {
+      font-size: .72rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(245,239,230,.5);
+      text-decoration: none;
+      transition: color .3s;
+    }
+    .footer-links a:hover { color: var(--terracota-light); }
+
+    /* ─── Scroll fade-in ─────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── Responsive ─────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero            { grid-template-columns: 1fr; min-height: 100svh; }
+      .hero-left       { padding: 8rem 6vw 4rem; }
+      .hero-right      { display: none; }
+      .hero-scroll     { display: none; }
+
+      .carta-header    { grid-template-columns: 1fr; }
+      .plats           { grid-template-columns: 1fr; }
+
+      .nosaltres       { grid-template-columns: 1fr; gap: 3rem; }
+      .nosaltres-img   { order: -1; }
+      .nosaltres-img img { height: 300px; }
+
+      .galeria-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 180px 180px 180px;
+      }
+      .galeria-item:nth-child(1) { grid-column: 1; grid-row: 1; }
+      .galeria-item:nth-child(2) { grid-column: 2; grid-row: 1 / 3; }
+      .galeria-item:nth-child(3) { grid-column: 1; grid-row: 2; }
+      .galeria-item:nth-child(4) { grid-column: 1; grid-row: 3; }
+      .galeria-item:nth-child(5) { grid-column: 2; grid-row: 3; }
+      .galeria-item:nth-child(6) { display: none; }
+
+      .contacte        { grid-template-columns: 1fr; gap: 3rem; }
+      .form-row        { grid-template-columns: 1fr; }
+
+      footer           { flex-direction: column; text-align: center; gap: 1.5rem; }
+    }
+
+    @media (max-width: 640px) {
+      nav              { padding: 1rem 5vw; }
+      .nav-links, .nav-reserva { display: none; }
+      .hamburger       { display: flex; }
+      .mobile-menu     { display: flex; }
+
+      .hero-title      { font-size: 2.6rem; }
+      .hero-badge      { width: 90px; height: 90px; bottom: 1.5rem; right: 1.5rem; display: none; }
+
+      .carta           { padding: 5rem 5vw; }
+      .plat            { padding: 2rem 1.8rem; }
+
+      .nosaltres       { padding: 5rem 5vw; }
+
+      .galeria         { padding: 5rem 5vw; }
+      .galeria-grid    { grid-template-columns: 1fr; grid-template-rows: repeat(5, 200px); }
+      .galeria-item:nth-child(1),
+      .galeria-item:nth-child(2),
+      .galeria-item:nth-child(3),
+      .galeria-item:nth-child(4),
+      .galeria-item:nth-child(5) {
+        grid-column: 1;
+        grid-row: auto;
+      }
+
+      .contacte        { padding: 5rem 5vw; }
+      .contacte-form-area { padding: 2.5rem 1.8rem; }
+
+      footer           { padding: 2rem 5vw; }
+      .footer-links    { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── Mobile menu ──────────────────────────────────────── -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" id="menuClose" aria-label="Tancar menú">✕</button>
+  <a href="#carta"    onclick="closeMobileMenu()">Carta</a>
+  <a href="#nosaltres" onclick="closeMobileMenu()">Nosaltres</a>
+  <a href="#galeria"  onclick="closeMobileMenu()">Galeria</a>
+  <a href="#contacte" onclick="closeMobileMenu()">Contacte</a>
+  <a href="#contacte" onclick="closeMobileMenu()" style="color:var(--terracota);">Reserva →</a>
+</div>
+
+<!-- ─── Nav ──────────────────────────────────────────────── -->
+<nav>
+  <a class="nav-logo" href="#">Can <span>Torra</span></a>
+  <ul class="nav-links">
+    <li><a href="#carta">Carta</a></li>
+    <li><a href="#nosaltres">Nosaltres</a></li>
+    <li><a href="#galeria">Galeria</a></li>
+    <li><a href="#contacte">Contacte</a></li>
+  </ul>
+  <a class="nav-reserva" href="#contacte">Reserva taula</a>
+  <button class="hamburger" id="hamburger" aria-label="Obrir menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ─── Hero ──────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-tag">Cuina de la Terra · Des de 1987</p>
+    <h1 class="hero-title">
+      On la cuina<br>
+      parla <em>sense</em><br>
+      pressa
+    </h1>
+    <p class="hero-sub">
+      Al cor de Guissona, entre oliveres i vinyes centenàries, la família Torrent porta tres generacions transformant el millor de la terra catalana en memòria.
+    </p>
+    <a class="hero-cta" href="#contacte">
+      Reserva la teva taula
+      <svg width="16" height="10" viewBox="0 0 16 10" fill="none">
+        <path d="M1 5h14M10 1l5 4-5 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-img-wrap">
+      <img
+        src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&auto=format&fit=crop&q=80"
+        alt="Interior Can Torra"
+        loading="eager"
+      />
+    </div>
+    <div class="hero-badge">
+      <span class="badge-num">37</span>
+      <span class="badge-text">Anys de cuina viva</span>
+    </div>
+  </div>
+
+  <p class="hero-scroll">Descobreix la carta</p>
+</section>
+
+<!-- ─── Carta ─────────────────────────────────────────────── -->
+<section class="carta" id="carta">
+  <div class="carta-header reveal">
+    <div>
+      <p class="section-label">Plats destacats</p>
+      <h2 class="section-title">Una carta que<br><em>honra l'origen</em></h2>
+      <div class="divider"></div>
+    </div>
+    <p class="carta-intro">
+      Productes de proximitat, receptes de la terra i tècniques que respecten el producte. Cada plat és una conversa entre la tradició i el present.
+    </p>
+  </div>
+
+  <div class="plats">
+    <!-- Plat 1 -->
+    <div class="plat reveal">
+      <p class="plat-num">01</p>
+      <h3 class="plat-name">Escudella de<br><em>xai i bolets</em></h3>
+      <p class="plat-desc">Brou fosc llargament reduït, xai de la Noguera, ceps secs i pilota de porc negre. Una abraçada a l'hivern.</p>
+      <div class="plat-footer">
+        <span class="plat-price">16 €</span>
+        <span class="plat-tag">Temporada</span>
+      </div>
+    </div>
+
+    <!-- Plat 2 -->
+    <div class="plat reveal">
+      <p class="plat-num">02</p>
+      <h3 class="plat-name">Arròs de<br><em>cranc i allioli</em></h3>
+      <p class="plat-desc">Arròs de Pals melós, cranc de la costa, sofregit de tomàquet de penjar i un allioli negre que canvia-ho tot.</p>
+      <div class="plat-footer">
+        <span class="plat-price">22 €</span>
+        <span class="plat-tag">Exclusiu</span>
+      </div>
+    </div>
+
+    <!-- Plat 3 -->
+    <div class="plat reveal">
+      <p class="plat-num">03</p>
+      <h3 class="plat-name">Colomí<br><em>amb figues</em></h3>
+      <p class="plat-desc">Pit de colomí rossejat, reducció de vi ranci, figues caramel·litzades i puré de moniato amb oli d'arbequina.</p>
+      <div class="plat-footer">
+        <span class="plat-price">26 €</span>
+        <span class="plat-tag">Caça</span>
+      </div>
+    </div>
+
+    <!-- Plat 4 -->
+    <div class="plat reveal">
+      <p class="plat-num">04</p>
+      <h3 class="plat-name">Crema<br><em>catalana antiga</em></h3>
+      <p class="plat-desc">La recepta de la iaia Montse des de 1964. Llimona de l'hort, canyella de Ceilan, sucre cremat al moment.</p>
+      <div class="plat-footer">
+        <span class="plat-price">8 €</span>
+        <span class="plat-tag">Clàssic</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Nosaltres ─────────────────────────────────────────── -->
+<section class="nosaltres" id="nosaltres">
+  <div class="nosaltres-text reveal">
+    <p class="section-label">La nostra història</p>
+    <h2 class="section-title">Tres generacions,<br><em>un sol foc</em></h2>
+    <div class="divider"></div>
+    <p class="big-quote">"Cuinar bé és recordar d'on vens i tenir cura de qui tens davant."</p>
+    <p>
+      El 1987, en Miquel Torrent va obrir les portes d'aquest casal a Guissona amb una taula de marbre i la determinació de cuinar com ho feien a casa. Avui, la seva filla Núria porta els fogons amb el mateix respecte pel producte, però amb una mirada oberta al present. No busquem ser tendència. Busquem que surti content qui entra.
+    </p>
+  </div>
+  <div class="nosaltres-img reveal">
+    <img
+      src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&auto=format&fit=crop&q=80"
+      alt="Interior del restaurant Can Torra"
+      loading="lazy"
+    />
+  </div>
+</section>
+
+<!-- ─── Galeria ────────────────────────────────────────────── -->
+<section class="galeria" id="galeria">
+  <div class="reveal">
+    <p class="section-label">Galeria</p>
+    <h2 class="section-title">Imatges que <em>diuen</em> més</h2>
+    <div class="divider"></div>
+  </div>
+
+  <div class="galeria-grid">
+    <div class="galeria-item">
+      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&auto=format&fit=crop&q=75" alt="Plat de cuina mediterrània" loading="lazy" />
+    </div>
+    <div class="galeria-item">
+      <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=600&auto=format&fit=crop&q=75" alt="Interior restaurant" loading="lazy" />
+    </div>
+    <div class="galeria-item">
+      <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&auto=format&fit=crop&q=75" alt="Pizza mediterrània" loading="lazy" />
+    </div>
+    <div class="galeria-item">
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&auto=format&fit=crop&q=75" alt="Cuina i xef" loading="lazy" />
+    </div>
+    <div class="galeria-item">
+      <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&auto=format&fit=crop&q=75" alt="Taula parada" loading="lazy" />
+    </div>
+    <div class="galeria-item">
+      <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&auto=format&fit=crop&q=75" alt="Postres" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<!-- ─── Contacte ──────────────────────────────────────────── -->
+<section class="contacte" id="contacte">
+  <div class="contacte-info reveal">
+    <p class="section-label">On trobar-nos</p>
+    <h2 class="section-title">Horaris &<br><em>Contacte</em></h2>
+    <div class="divider"></div>
+
+    <div class="info-block">
+      <h4>Adreça</h4>
+      <p>Carrer del Portal, 12<br>25210 Guissona, Lleida</p>
+    </div>
+
+    <div class="info-block">
+      <h4>Telèfon & Correu</h4>
+      <p>973 55 14 82<br>reservas@cantorra.cat</p>
+    </div>
+
+    <div class="info-block">
+      <h4>Horaris</h4>
+      <div class="horari-grid">
+        <span class="dia">Dilluns</span>       <span class="tancat">Tancat</span>
+        <span class="dia">Dimarts – Dijous</span> <span>13:00 – 16:00</span>
+        <span class="dia">Divendres</span>     <span>13:00 – 16:00 · 20:30 – 23:00</span>
+        <span class="dia">Dissabte</span>      <span>13:00 – 16:30 · 20:30 – 23:00</span>
+        <span class="dia">Diumenge</span>      <span>13:00 – 16:30</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="contacte-form-area reveal">
+    <h3 class="form-title">Reserva la teva taula</h3>
+
+    <div class="form-group">
+      <label>Nom i cognoms</label>
+      <input type="text" placeholder="Maria García" />
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Telèfon</label>
+        <input type="tel" placeholder="6XX XXX XXX" />
+      </div>
+      <div class="form-group">
+        <label>Persones</label>
+        <select>
+          <option>1 persona</option>
+          <option>2 persones</option>
+          <option>3 – 4 persones</option>
+          <option>5 – 6 persones</option>
+          <option>Grup (7+)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Data</label>
+        <input type="date" />
+      </div>
+      <div class="form-group">
+        <label>Servei</label>
+        <select>
+          <option>Migdia</option>
+          <option>Nit</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Notes</label>
+      <textarea rows="3" placeholder="Al·lèrgies, ocasió especial..."></textarea>
+    </div>
+
+    <button class="btn-enviar" type="button">Confirmar reserva →</button>
+  </div>
+</section>
+
+<!-- ─── Footer ────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-logo">Can <span>Torra</span></div>
+  <p class="footer-copy">© 2024 Can Torra · Guissona, Lleida · Tots els drets reservats</p>
+  <ul class="footer-links">
+    <li><a href="#">Avís Legal</a></li>
+    <li><a href="#">Privacitat</a></li>
+    <li><a href="#">Instagram</a></li>
+  </ul>
+</footer>
+
+<!-- ─── Scripts ───────────────────────────────────────────── -->
+<script>
+  // Hamburger menu
+  const hamburger   = document.getElementById('hamburger');
+  const mobileMenu  = document.getElementById('mobileMenu');
+  const menuClose   = document.getElementById('menuClose');
+
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+
+  menuClose.addEventListener('click', closeMobileMenu);
+
+  function closeMobileMenu() {
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        // Stagger siblings
+        const siblings = [...entry.target.parentElement.querySelectorAll('.reveal')];
+        const idx = siblings.indexOf(entry.target);
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, idx * 120);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
