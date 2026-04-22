@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -592,7 +593,6 @@
       opacity: 0.7;
       font-family: var(--body);
     }
-    .marquee-item:last-child::after { /* no change; keeps pattern */ }
 
     /* ── PROBLEMA ───────────────────────────────────────── */
     #problema {
@@ -1090,7 +1090,6 @@
       .fc-stars  { display: none; }
       .fc-types  { bottom: -16px; font-size: 11px; }
 
-      /* Disable parallax on mobile for perf */
       .px-slow, .px-med, .px-fast { transform: none !important; }
 
       .stats-row { gap: 0; }
@@ -1115,7 +1114,6 @@
 
       .footer-inner { flex-direction: column; gap: 8px; text-align: center; }
 
-      /* Slide reveals become vertical on mobile (less distance) */
       .rv-l { transform: translateX(-30px); }
       .rv-r { transform: translateX(30px); }
     }
@@ -1183,32 +1181,14 @@
       <div>
         <div class="hero-badge">
           <span class="hero-badge-dot"></span>
-          Barberías · Restaurantes · Clínicas · Tiendas
+          Tu competencia aparece en Google cuando alguien busca un negocio como el tuyo en tu barrio. Tú no.
         </div>
         <h1 class="hero-title">Tú trabaja en lo tuyo, que yo me ocupo de la parte online</h1>
-        <p class="hero-sub">Webs profesionales para negocios locales que quieren aparecer en Google y no perder clientes por tener una web antigua o inexistente.</p>
+        <p class="hero-sub">Te hago la web en 7 días. Tú sigues con tu negocio.</p>
         <div class="hero-ctas">
           <a href="#contacto" class="btn btn-p">Quiero mi web →</a>
           <a href="#portfolio" class="btn btn-s">Ver ejemplos</a>
         </div>
-
-        <div class="hero-stats">
-          <div class="hero-stat-item">
-            <div class="hero-stat-num">300€</div>
-            <div class="hero-stat-label">desde pago único</div>
-          </div>
-          <div class="hero-stat-sep"></div>
-          <div class="hero-stat-item">
-            <div class="hero-stat-num">7d</div>
-            <div class="hero-stat-label">tiempo medio de entrega</div>
-          </div>
-          <div class="hero-stat-sep"></div>
-          <div class="hero-stat-item">
-            <div class="hero-stat-num">1 mes</div>
-            <div class="hero-stat-label">soporte incluido</div>
-          </div>
-        </div>
-      </div>
 
       <div class="hero-visual" data-px="slow">
         <div class="site-card">
@@ -1303,7 +1283,7 @@
           <line x1="6"  y1="6"  x2="14" y2="14"/>
         </svg>
         <h3>No aparezco en Google</h3>
-        <p>Cuando alguien busca un negocio como el tuyo en tu zona, aparecen tus competidores. Tú no.</p>
+        <p>Cada vez que alguien busca en Google un negocio como el tuyo en tu zona, le aparece tu competidor. Tú no existes.</p>
       </div>
 
       <div class="prob-card rv" style="--d:180ms">
@@ -1315,7 +1295,7 @@
           <line x1="15" y1="8"  x2="9"  y2="14"/>
         </svg>
         <h3>Mi web está antigua o caída</h3>
-        <p>Una web de 2010 o con error da peor imagen que no tener web.</p>
+        <p>Una web de 2010 o con error no da lástima. Da desconfianza. Y la desconfianza no reserva citas ni hace pedidos.</p>
       </div>
 
       <div class="prob-card rv-r" style="--d:360ms">
@@ -1325,7 +1305,7 @@
           <line x1="9" y1="9" x2="15" y2="15"/>
         </svg>
         <h3>No tengo tiempo ni ganas</h3>
-        <p>Tienes un negocio que gestionar. Lo digital no debería ser tu problema.</p>
+        <p>Tienes un negocio que gestionar. Lo digital no debería ser tu problema. Es el mío.</p>
       </div>
     </div>
   </div>
@@ -1362,7 +1342,7 @@
     <div class="serv-inner">
 
       <div class="rv-l">
-        <div class="section-kicker">Lo que incluye</div>
+        <div class="section-kicker">Lo que consigues</div>
         <h2 class="serv-title">Todo lo que necesitas para estar online</h2>
         <p class="serv-intro">Sin traducciones técnicas, sin idas y venidas. Te entrego todo funcionando y listo para que te busquen.</p>
         <div class="serv-tags">
@@ -1379,22 +1359,22 @@
         <li class="serv-item">
           <span class="serv-num">01</span>
           <div>
-            <h3>Landing profesional</h3>
-            <p>Diseñada para que los visitantes llamen, reserven o escriban.</p>
+            <h3>Clientes que te llaman antes de cruzar la puerta</h3>
+            <p>Diseñada para que quien llegue a tu web llame, reserve o escriba. No para que la admire y se vaya.</p>
           </div>
         </li>
         <li class="serv-item">
           <span class="serv-num">02</span>
           <div>
-            <h3>Dominio configurado</h3>
-            <p>Tu web en tu propio dominio. Sin tocar nada técnico.</p>
+            <h3>Apareces en Google con tu nombre, no con el de tu competidor</h3>
+            <p>Tu web, en tu dominio, lista para que te encuentren. Sin tocar nada técnico.</p>
           </div>
         </li>
         <li class="serv-item">
           <span class="serv-num">03</span>
           <div>
-            <h3>Soporte el primer mes incluido</h3>
-            <p>Cualquier problema en el primer mes lo resuelvo yo.</p>
+            <h3>Si algo falla el primer mes, es mi problema, no el tuyo</h3>
+            <p>Cualquier incidencia en el primer mes la resuelvo yo. Sin excusas.</p>
           </div>
         </li>
       </ul>
@@ -1473,7 +1453,7 @@
 <section id="contacto">
   <div class="wrap">
     <h2 class="c-title rv">¿Hablamos?</h2>
-    <p class="c-sub rv" style="--d:120ms">Cuéntame qué necesitas y te digo en qué puedo ayudarte. Sin compromiso.</p>
+    <p class="c-sub rv" style="--d:120ms">Solo cojo un proyecto nuevo por semana. Si tienes el hueco, cuéntame qué necesitas.</p>
 
     <div class="c-inner">
 
