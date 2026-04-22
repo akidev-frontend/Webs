@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Martí Baró — Personal Trainer en Barcelona. +12 años de experiencia. Método Baró: pierde 12 kg en 15 semanas sin efecto rebote. Colegiado 13.034.">
+<meta property="og:title" content="Martí Baró · Personal Trainer Barcelona">
+<meta property="og:description" content="+12 años. 90+ clientes. Garantía de resultados. El Método Baró funciona.">
+<meta property="og:type" content="website">
+<title>Martí Baró · Personal Trainer Barcelona</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0c0c0b;
+    --bg2: #111110;
+    --bg3: #161614;
+    --surface: #1c1c1a;
+    --surface2: #232320;
+    --accent: #c9a84c;
+    --accent2: #e0bf72;
+    --accent-dim: rgba(201,168,76,0.1);
+    --accent-border: rgba(201,168,76,0.2);
+    --text: #eeede8;
+    --text2: #9a9890;
+    --text3: #555450;
+    --border: rgba(255,255,255,0.05);
+    --border2: rgba(201,168,76,0.18);
+    --font-display: 'Playfair Display', serif;
+    --font-title: 'Syne', sans-serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 2.5rem;
+    background: rgba(12,12,11,0.9);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.15rem; font-weight: 700;
+    color: var(--text); text-decoration: none; letter-spacing: 0.01em;
+  }
+  .nav-logo em { color: var(--accent); font-style: italic; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: var(--font-body); font-size: 0.82rem; font-weight: 500;
+    letter-spacing: 0.05em; color: var(--text2); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    font-family: var(--font-body); font-size: 0.82rem; font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 0.6rem 1.5rem;
+    background: transparent; color: var(--accent);
+    border: 1px solid var(--accent-border); border-radius: 100px;
+    cursor: pointer; text-decoration: none;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .nav-cta:hover { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text2); border-radius: 1px; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center;
+    max-width: 1200px; margin: 0 auto;
+    padding: 8rem 2.5rem 4rem;
+    gap: 4rem;
+  }
+  .hero-left { display: flex; flex-direction: column; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-body); font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);
+    border: 1px solid var(--accent-border); border-radius: 100px;
+    padding: 0.35rem 1rem; margin-bottom: 2rem; align-self: flex-start;
+    opacity: 0; transform: translateY(12px);
+    animation: fadeUp 0.5s ease 0.1s forwards;
+  }
+  .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(3.2rem, 5vw, 5.5rem);
+    font-weight: 900; line-height: 1.0;
+    color: var(--text); margin-bottom: 1.5rem;
+    opacity: 0; transform: translateY(18px);
+    animation: fadeUp 0.6s ease 0.2s forwards;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); display: block; }
+  .hero-sub {
+    font-size: 1.05rem; color: var(--text2); max-width: 44ch;
+    margin-bottom: 2.5rem; line-height: 1.75;
+    opacity: 0; transform: translateY(16px);
+    animation: fadeUp 0.6s ease 0.35s forwards;
+  }
+  .hero-actions {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    opacity: 0; transform: translateY(16px);
+    animation: fadeUp 0.6s ease 0.5s forwards;
+  }
+  .btn-primary {
+    font-family: var(--font-body); font-size: 0.85rem; font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 0.9rem 2rem;
+    background: var(--accent); color: var(--bg);
+    border: none; border-radius: 100px; cursor: pointer; text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-2px); }
+  .btn-secondary {
+    font-family: var(--font-body); font-size: 0.85rem; font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 0.9rem 2rem;
+    background: transparent; color: var(--text2);
+    border: 1px solid var(--border); border-radius: 100px; cursor: pointer; text-decoration: none;
+    transition: color 0.2s, border-color 0.2s, transform 0.15s;
+  }
+  .btn-secondary:hover { color: var(--text); border-color: rgba(255,255,255,0.15); transform: translateY(-2px); }
+
+  /* HERO RIGHT — credenciales */
+  .hero-right {
+    display: flex; flex-direction: column; gap: 1rem;
+    opacity: 0; transform: translateX(24px);
+    animation: fadeRight 0.7s ease 0.6s forwards;
+  }
+  @keyframes fadeRight { to { opacity: 1; transform: translateX(0); } }
+  .cred-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.5rem;
+    transition: border-color 0.25s;
+  }
+  .cred-card:hover { border-color: var(--border2); }
+  .cred-card-num {
+    font-family: var(--font-display); font-size: 3rem; font-weight: 900;
+    color: var(--accent); line-height: 1; margin-bottom: 4px;
+  }
+  .cred-card-label { font-size: 0.82rem; color: var(--text2); font-weight: 500; }
+  .cred-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .cred-pill {
+    background: var(--accent-dim); border: 1px solid var(--accent-border);
+    border-radius: 8px; padding: 0.85rem 1rem;
+  }
+  .cred-pill-label { font-size: 0.7rem; color: var(--accent); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 2px; }
+  .cred-pill-value { font-size: 0.9rem; color: var(--text); font-weight: 500; }
+
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+  /* ── SECTIONS ── */
+  section { padding: 5.5rem 2.5rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-tag {
+    font-family: var(--font-body); font-size: 0.7rem; font-weight: 600;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent);
+    margin-bottom: 0.6rem; display: block;
+  }
+  .section-title {
+    font-family: var(--font-display); font-weight: 900;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    line-height: 1.05; color: var(--text); margin-bottom: 1rem;
+  }
+  .section-title em { font-style: italic; color: var(--accent); }
+  .section-sub { font-size: 1rem; color: var(--text2); max-width: 52ch; line-height: 1.75; }
+
+  /* ── MÉTODO BARÓ ── */
+  #metodo { background: var(--bg2); }
+  .metodo-layout {
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 5rem;
+    margin-top: 3.5rem; align-items: start;
+  }
+  .metodo-highlight {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px; padding: 2.5rem;
+    position: sticky; top: 7rem;
+  }
+  .metodo-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--bg); background: var(--accent);
+    padding: 0.3rem 0.9rem; border-radius: 100px; margin-bottom: 1.5rem;
+  }
+  .metodo-big {
+    font-family: var(--font-display); font-size: 1.65rem; font-weight: 700; font-style: italic;
+    color: var(--text); line-height: 1.3; margin-bottom: 1.5rem;
+  }
+  .metodo-stat-row { display: flex; gap: 1.5rem; margin-bottom: 1.5rem; }
+  .metodo-stat { text-align: center; flex: 1; }
+  .metodo-stat-num {
+    font-family: var(--font-display); font-size: 3rem; font-weight: 900; color: var(--accent); line-height: 1;
+  }
+  .metodo-stat-label { font-size: 0.78rem; color: var(--text3); margin-top: 4px; }
+  .metodo-divider { width: 100%; height: 1px; background: var(--border); margin: 1.5rem 0; }
+  .metodo-note { font-size: 0.82rem; color: var(--text3); line-height: 1.6; }
+
+  .proceso-steps { display: flex; flex-direction: column; gap: 0; }
+  .proceso-step {
+    display: flex; gap: 1.5rem;
+    padding: 1.75rem 0; border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+  .proceso-step:last-child { border-bottom: none; }
+  .paso-num {
+    font-family: var(--font-display); font-size: 2.5rem; font-weight: 900;
+    color: var(--accent); line-height: 1; flex-shrink: 0;
+    width: 2.5rem; text-align: right; opacity: 0.4;
+  }
+  .paso-title {
+    font-family: var(--font-title); font-size: 1rem; font-weight: 700;
+    color: var(--text); margin-bottom: 0.3rem; letter-spacing: 0.04em;
+  }
+  .paso-desc { font-size: 0.88rem; color: var(--text2); line-height: 1.65; }
+
+  /* ── SERVICIOS ── */
+  #servicios { background: var(--bg); }
+  .servicios-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px; margin-top: 3.5rem;
+    background: var(--border); border-radius: 16px; overflow: hidden;
+  }
+  .servicio-card {
+    background: var(--bg); padding: 2rem 1.75rem;
+    transition: background 0.25s;
+  }
+  .servicio-card:hover { background: var(--surface); }
+  .servicio-icon { font-size: 1.5rem; margin-bottom: 0.85rem; display: block; }
+  .servicio-title {
+    font-family: var(--font-title); font-size: 0.9rem; font-weight: 700;
+    color: var(--text); margin-bottom: 0.4rem; letter-spacing: 0.04em;
+  }
+  .servicio-desc { font-size: 0.82rem; color: var(--text2); line-height: 1.6; }
+
+  .planes-row {
+    display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2.5rem;
+  }
+  .plan-tag {
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em;
+    padding: 0.4rem 1rem; background: var(--surface); color: var(--text2);
+    border: 1px solid var(--border); border-radius: 100px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .plan-tag:hover { border-color: var(--accent-border); color: var(--accent); }
+
+  /* ── TESTIMONIOS ── */
+  #testimonios { background: var(--bg2); }
+  .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+  .testi-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 2rem;
+    transition: border-color 0.25s;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .testi-card:hover { border-color: var(--border2); }
+  .testi-stars { color: var(--accent); font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 1rem; }
+  .testi-text {
+    font-family: var(--font-display); font-style: italic; font-size: 1.05rem;
+    color: var(--text); line-height: 1.55; margin-bottom: 1.25rem; flex: 1;
+  }
+  .testi-author { font-size: 0.78rem; color: var(--text3); font-weight: 600; letter-spacing: 0.06em; }
+  .testi-rating-bar {
+    display: flex; align-items: center; gap: 1rem; margin-top: 3rem;
+    padding: 1.5rem 2rem; background: var(--surface); border-radius: 12px;
+    border: 1px solid var(--border);
+  }
+  .testi-big-num {
+    font-family: var(--font-display); font-size: 4rem; font-weight: 900;
+    color: var(--accent); line-height: 1;
+  }
+  .testi-info-label { font-size: 0.75rem; color: var(--text3); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 2px; }
+  .testi-info-val { font-size: 0.95rem; color: var(--text); font-weight: 500; }
+
+  /* ── CONTACTO ── */
+  #contacto { background: var(--bg); }
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1.3fr; gap: 5rem;
+    margin-top: 3.5rem; align-items: start;
+  }
+  .contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+  .contact-item { display: flex; gap: 1rem; align-items: flex-start; }
+  .contact-icon {
+    width: 42px; height: 42px; border-radius: 10px;
+    background: var(--accent-dim); border: 1px solid var(--accent-border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0;
+  }
+  .contact-item-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); margin-bottom: 2px; }
+  .contact-item-value { font-size: 0.95rem; color: var(--text); text-decoration: none; }
+  .contact-item-value:hover { color: var(--accent); }
+  .contact-colegiado {
+    padding: 1rem 1.25rem; background: var(--accent-dim);
+    border: 1px solid var(--accent-border); border-radius: 10px;
+    font-size: 0.82rem; color: var(--text2); line-height: 1.6;
+  }
+  .contact-colegiado strong { color: var(--accent); }
+  .whatsapp-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 0.85rem; font-weight: 600;
+    padding: 0.85rem 1.75rem;
+    background: #25D366; color: #fff;
+    border-radius: 100px; text-decoration: none;
+    transition: background 0.2s, transform 0.15s; margin-top: 0.25rem;
+  }
+  .whatsapp-btn:hover { background: #20b85a; transform: translateY(-2px); }
+
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 0.8rem 1rem;
+    color: var(--text); font-family: var(--font-body); font-size: 0.9rem;
+    outline: none; transition: border-color 0.2s; width: 100%; appearance: none;
+  }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: var(--text3); }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--accent-border); }
+  .form-group textarea { resize: vertical; min-height: 110px; }
+  .form-submit {
+    font-family: var(--font-body); font-size: 0.85rem; font-weight: 600;
+    padding: 0.9rem 2rem;
+    background: var(--accent); color: var(--bg);
+    border: none; border-radius: 100px; cursor: pointer;
+    transition: background 0.2s, transform 0.15s; align-self: flex-start;
+  }
+  .form-submit:hover { background: var(--accent2); transform: translateY(-2px); }
+  .form-note { font-size: 0.75rem; color: var(--text3); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--bg2); border-top: 1px solid var(--border);
+    padding: 2rem 2.5rem;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-logo { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--text); }
+  .footer-logo em { color: var(--accent); }
+  footer p, footer a { font-size: 0.75rem; color: var(--text3); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── MOBILE NAV ── */
+  .mobile-nav {
+    display: none; position: fixed; inset: 0;
+    background: rgba(12,12,11,0.98); z-index: 200;
+    flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a {
+    font-family: var(--font-display); font-size: 2rem; font-weight: 700;
+    color: var(--text2); text-decoration: none; transition: color 0.2s;
+  }
+  .mobile-nav a:hover { color: var(--accent); }
+  .mobile-nav-close { position: absolute; top: 1.5rem; right: 2rem; background: none; border: none; color: var(--text2); font-size: 1.5rem; cursor: pointer; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; }
+    .hero-right { animation: fadeUp 0.7s ease 0.6s forwards; }
+    .metodo-layout { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .testi-rating-bar { flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 768px) {
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    nav { padding: 1rem 1.25rem; }
+    section { padding: 4rem 1.25rem; }
+    footer { flex-direction: column; text-align: center; padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Martí <em>Baró</em></a>
+  <ul class="nav-links">
+    <li><a href="#metodo">Método Baró</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#testimonios">Testimonios</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a class="nav-cta" href="#contacto">Primera sesión</a>
+  <button class="hamburger" aria-label="Menú" onclick="document.getElementById('mobileNav').classList.add('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" onclick="document.getElementById('mobileNav').classList.remove('open')">✕</button>
+  <a href="#metodo" onclick="document.getElementById('mobileNav').classList.remove('open')">Método Baró</a>
+  <a href="#servicios" onclick="document.getElementById('mobileNav').classList.remove('open')">Servicios</a>
+  <a href="#testimonios" onclick="document.getElementById('mobileNav').classList.remove('open')">Testimonios</a>
+  <a href="#contacto" onclick="document.getElementById('mobileNav').classList.remove('open')">Contacto</a>
+</div>
+
+<!-- HERO -->
+<div style="max-width:1200px;margin:0 auto;">
+  <div class="hero">
+    <div class="hero-left">
+      <span class="hero-badge">Personal Trainer · Barcelona · Colegiado 13.034</span>
+      <h1>Entrena.<br>Mejora.<br><em>De verdad.</em></h1>
+      <p class="hero-sub">+12 años transformando cuerpos y hábitos en Barcelona. Plan 100% personalizado de ejercicio y nutrición. Garantía de resultados.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#contacto">Empieza ahora →</a>
+        <a class="btn-secondary" href="#metodo">El Método Baró</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="cred-card">
+        <div class="cred-card-num">4,8★</div>
+        <div class="cred-card-label">Valoración media · 90+ reseñas verificadas</div>
+      </div>
+      <div class="cred-row">
+        <div class="cred-pill">
+          <div class="cred-pill-label">Experiencia</div>
+          <div class="cred-pill-value">+12 años</div>
+        </div>
+        <div class="cred-pill">
+          <div class="cred-pill-label">Titulación</div>
+          <div class="cred-pill-value">CCAFD + Nutrición</div>
+        </div>
+        <div class="cred-pill">
+          <div class="cred-pill-label">Colegiado</div>
+          <div class="cred-pill-value">Nº 13.034</div>
+        </div>
+        <div class="cred-pill">
+          <div class="cred-pill-label">Modalidades</div>
+          <div class="cred-pill-value">Gym · Outdoor · Online</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MÉTODO BARÓ -->
+<section id="metodo">
+  <div class="container">
+    <span class="section-tag reveal">El método</span>
+    <h2 class="section-title reveal reveal-delay-1">El <em>Método Baró</em></h2>
+    <p class="section-sub reveal reveal-delay-2">Un sistema de 4 pasos que lleva más de una década dando resultados reales y duraderos.</p>
+    <div class="metodo-layout">
+      <div class="proceso-steps">
+        <div class="proceso-step reveal">
+          <div class="paso-num">1</div>
+          <div>
+            <div class="paso-title">Analizar</div>
+            <p class="paso-desc">Entrevista inicial para entender tu punto de partida, objetivos y estilo de vida. Sin esto, cualquier plan es genérico.</p>
+          </div>
+        </div>
+        <div class="proceso-step reveal reveal-delay-1">
+          <div class="paso-num">2</div>
+          <div>
+            <div class="paso-title">Entrenar</div>
+            <p class="paso-desc">Rutina a medida. Técnica correcta desde el día uno para evitar lesiones y maximizar cada sesión.</p>
+          </div>
+        </div>
+        <div class="proceso-step reveal reveal-delay-2">
+          <div class="paso-num">3</div>
+          <div>
+            <div class="paso-title">Mejorar</div>
+            <p class="paso-desc">Revisiones constantes. El plan evoluciona contigo. Nada es estático porque tu cuerpo tampoco lo es.</p>
+          </div>
+        </div>
+        <div class="proceso-step reveal reveal-delay-3">
+          <div class="paso-num">4</div>
+          <div>
+            <div class="paso-title">Alcanzar</div>
+            <p class="paso-desc">Garantía de objetivos. Si haces tu parte, Martí garantiza que llegas donde quieres llegar.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="metodo-highlight reveal reveal-delay-2">
+        <span class="metodo-pill">Método Baró</span>
+        <p class="metodo-big">Pierde 12 kg en 15 semanas. Sin efecto rebote.</p>
+        <div class="metodo-stat-row">
+          <div class="metodo-stat">
+            <div class="metodo-stat-num">12</div>
+            <div class="metodo-stat-label">kg de media perdidos</div>
+          </div>
+          <div class="metodo-stat">
+            <div class="metodo-stat-num">15</div>
+            <div class="metodo-stat-label">semanas de programa</div>
+          </div>
+          <div class="metodo-stat">
+            <div class="metodo-stat-num">0</div>
+            <div class="metodo-stat-label">efecto rebote</div>
+          </div>
+        </div>
+        <div class="metodo-divider"></div>
+        <p class="metodo-note">El método combina entrenamiento personalizado y plan nutricional adaptado. Sin dietas milagro ni rutinas imposibles de mantener.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="container">
+    <span class="section-tag reveal">Servicios</span>
+    <h2 class="section-title reveal reveal-delay-1">Donde y como <em>quieras</em></h2>
+    <p class="section-sub reveal reveal-delay-2">Da igual dónde estés o cuál sea tu punto de partida. Hay un formato para ti.</p>
+    <div class="servicios-grid">
+      <div class="servicio-card reveal">
+        <span class="servicio-icon">🏋️</span>
+        <div class="servicio-title">En el gimnasio</div>
+        <p class="servicio-desc">Calle de Aragón, 328. Equipamiento completo y entrenamiento de calidad.</p>
+      </div>
+      <div class="servicio-card reveal reveal-delay-1">
+        <span class="servicio-icon">🌳</span>
+        <div class="servicio-title">Al aire libre</div>
+        <p class="servicio-desc">Parques y espacios de Barcelona. Más motivador que cualquier sala cerrada.</p>
+      </div>
+      <div class="servicio-card reveal reveal-delay-2">
+        <span class="servicio-icon">🏠</span>
+        <div class="servicio-title">A domicilio</div>
+        <p class="servicio-desc">Martí va a donde estás tú. Sin excusas de tiempo ni desplazamientos.</p>
+      </div>
+      <div class="servicio-card reveal reveal-delay-3">
+        <span class="servicio-icon">💻</span>
+        <div class="servicio-title">Online</div>
+        <p class="servicio-desc">Seguimiento completo desde cualquier ciudad. El mismo nivel de atención.</p>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-1" style="margin-top:2.5rem;">
+      <p style="font-size:0.8rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;font-weight:600;margin-bottom:0.75rem;">Planes específicos</p>
+      <div class="planes-row">
+        <span class="plan-tag">Tonificar</span>
+        <span class="plan-tag">Adelgazar</span>
+        <span class="plan-tag">Ganar músculo</span>
+        <span class="plan-tag">Parejas y grupos</span>
+        <span class="plan-tag">Pre y post parto</span>
+        <span class="plan-tag">Mayores de 60</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section id="testimonios">
+  <div class="container">
+    <span class="section-tag reveal">Testimonios</span>
+    <h2 class="section-title reveal reveal-delay-1">Lo que dicen <em>ellos</em></h2>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"He conseguido eliminar grasa y tonificar mi cuerpo. Algo que llevaba años intentando por mi cuenta sin éxito."</p>
+        </div>
+        <div class="testi-author">Mariona C. — Barcelona</div>
+      </div>
+      <div class="testi-card reveal reveal-delay-1">
+        <div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Entrenar con Martí es eficiencia, rigor y mucho buen rollo. No he vuelto a perder el tiempo en el gym."</p>
+        </div>
+        <div class="testi-author">Marc G. — Barcelona</div>
+      </div>
+      <div class="testi-card reveal reveal-delay-2">
+        <div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Huge progress in just 3 months. Professional, motivating and really knows what he's doing."</p>
+        </div>
+        <div class="testi-author">Enrique V. — Barcelona</div>
+      </div>
+    </div>
+    <div class="testi-rating-bar reveal">
+      <div class="testi-big-num">4,8</div>
+      <div>
+        <div style="color:var(--accent);font-size:1.1rem;letter-spacing:3px;margin-bottom:6px;">★★★★★</div>
+        <div class="testi-info-label">Reseñas verificadas</div>
+        <div class="testi-info-val">90+ clientes en Google</div>
+      </div>
+      <div style="flex:1;"></div>
+      <a class="btn-primary" href="#contacto">Sé el próximo →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="container">
+    <span class="section-tag reveal">Contacto</span>
+    <h2 class="section-title reveal reveal-delay-1">Empieza <em>hoy</em></h2>
+    <p class="section-sub reveal reveal-delay-2">Primera sesión de análisis gratuita. Sin compromiso, sin letra pequeña.</p>
+    <div class="contact-grid">
+      <div class="contact-info reveal reveal-delay-1">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-item-label">Dirección</div>
+            <span class="contact-item-value">Calle de Aragón, 328<br>Barcelona</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <div class="contact-item-label">Teléfono</div>
+            <a class="contact-item-value" href="tel:+34617829904">+34 617 829 904</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🌐</div>
+          <div>
+            <div class="contact-item-label">Web</div>
+            <a class="contact-item-value" href="https://www.martibaro.com" target="_blank">www.martibaro.com</a>
+          </div>
+        </div>
+        <div class="contact-colegiado">
+          <strong>Colegiado Nº 13.034</strong><br>
+          Licenciado en Ciencias de la Actividad Física y el Deporte + Nutricionista Deportivo. No cualquiera puede llamarse personal trainer.
+        </div>
+        <a class="whatsapp-btn" href="https://wa.me/34617829904?text=Hola%20Mart%C3%AD%2C%20me%20gustar%C3%ADa%20informarme%20sobre%20el%20entrenamiento%20personal." target="_blank">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Escríbeme por WhatsApp
+        </a>
+      </div>
+      <form class="contact-form reveal reveal-delay-2" action="https://formspree.io/f/XXXXXXXX" method="POST">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+          </div>
+          <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono" placeholder="600 000 000">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="tuemail@ejemplo.com" required>
+        </div>
+        <div class="form-group">
+          <label for="objetivo">Objetivo principal</label>
+          <select id="objetivo" name="objetivo">
+            <option value="" disabled selected>¿Qué quieres conseguir?</option>
+            <option>Perder peso / grasa</option>
+            <option>Ganar músculo</option>
+            <option>Tonificar</option>
+            <option>Mejorar condición física</option>
+            <option>Pre o post parto</option>
+            <option>Entrenamiento para mayores</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="modalidad">Modalidad preferida</label>
+          <select id="modalidad" name="modalidad">
+            <option value="" disabled selected>¿Cómo quieres entrenar?</option>
+            <option>En el gimnasio (Aragón, 328)</option>
+            <option>Al aire libre</option>
+            <option>A domicilio</option>
+            <option>Online</option>
+            <option>Sin preferencia</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="mensaje">Cuéntame algo más</label>
+          <textarea id="mensaje" name="mensaje" placeholder="Punto de partida, horarios disponibles, dudas..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Solicitar primera sesión →</button>
+        <p class="form-note">Primera sesión de análisis gratuita. Martí te responde en menos de 24h.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">Martí <em>Baró</em></span>
+  <p>Personal Trainer Barcelona · Colegiado 13.034 · Calle de Aragón, 328</p>
+  <a href="https://webs.akidojo.dev" target="_blank">Creado por AkiWebs</a>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
