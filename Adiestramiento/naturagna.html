@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Naturagna — Adiestramiento canino profesional en Sant Boi de Llobregat. Ansiedad por separación, cachorros, convivencia. Método basado en el disfrute del animal.">
+<meta property="og:title" content="Naturagna · Adiestramiento Canino">
+<meta property="og:description" content="Tu perro feliz, tu casa en paz. Resultados desde la primera sesión.">
+<meta property="og:type" content="website">
+<title>Naturagna · Adiestramiento Canino</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d1410;
+    --bg2: #111a14;
+    --bg3: #162019;
+    --surface: #1b2920;
+    --surface2: #223323;
+    --accent: #4a9c6a;
+    --accent2: #6bbf87;
+    --accent-dim: rgba(74,156,106,0.15);
+    --accent-glow: rgba(74,156,106,0.08);
+    --text: #e8ede9;
+    --text2: #9aac9e;
+    --text3: #617065;
+    --border: rgba(74,156,106,0.12);
+    --border2: rgba(74,156,106,0.22);
+    --font-display: 'DM Serif Display', serif;
+    --font-sans: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 2rem;
+    background: rgba(13,20,16,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
+    color: var(--accent2);
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--text2);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent2); }
+  .nav-cta {
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.55rem 1.4rem;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .nav-cta:hover { background: var(--accent2); transform: translateY(-1px); }
+
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--text2); border-radius: 2px; transition: all 0.25s; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+    padding: 8rem 2rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero::before {
+    content: '';
+    position: fixed; top: 0; right: 0; width: 55vw; height: 100vh;
+    background: radial-gradient(ellipse at 80% 40%, rgba(74,156,106,0.06) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-sans); font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent2);
+    border: 1px solid var(--border2); border-radius: 100px;
+    padding: 0.35rem 1rem; margin-bottom: 2rem;
+    opacity: 0; transform: translateY(16px);
+    animation: fadeUp 0.6s ease 0.1s forwards;
+  }
+  .hero-badge::before {
+    content: ''; width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent2);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.5; transform:scale(0.7); } }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 7vw, 6rem);
+    line-height: 1.05;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+    max-width: 13ch;
+    opacity: 0; transform: translateY(20px);
+    animation: fadeUp 0.7s ease 0.25s forwards;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent2);
+  }
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--text2);
+    max-width: 48ch;
+    margin-bottom: 2.5rem;
+    opacity: 0; transform: translateY(20px);
+    animation: fadeUp 0.7s ease 0.4s forwards;
+  }
+  .hero-actions {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    opacity: 0; transform: translateY(20px);
+    animation: fadeUp 0.7s ease 0.55s forwards;
+  }
+  .btn-primary {
+    font-family: var(--font-sans); font-size: 0.85rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0.85rem 2rem;
+    background: var(--accent); color: #fff;
+    border: none; border-radius: 4px; cursor: pointer; text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-2px); }
+  .btn-secondary {
+    font-family: var(--font-sans); font-size: 0.85rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0.85rem 2rem;
+    background: transparent; color: var(--text2);
+    border: 1px solid var(--border2); border-radius: 4px; cursor: pointer; text-decoration: none;
+    transition: color 0.2s, border-color 0.2s, transform 0.15s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-secondary:hover { color: var(--accent2); border-color: var(--accent2); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex; gap: 2.5rem; margin-top: 4rem; padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    opacity: 0; transform: translateY(20px);
+    animation: fadeUp 0.7s ease 0.7s forwards;
+  }
+  .stat-num {
+    font-family: var(--font-display); font-size: 2.2rem; color: var(--accent2);
+    line-height: 1;
+  }
+  .stat-label { font-size: 0.8rem; color: var(--text3); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.06em; font-family: var(--font-sans); }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 5rem 2rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-tag {
+    font-family: var(--font-sans); font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent);
+    margin-bottom: 0.75rem; display: block;
+  }
+  .section-title {
+    font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.1; color: var(--text); margin-bottom: 1rem;
+  }
+  .section-sub { font-size: 1rem; color: var(--text2); max-width: 54ch; line-height: 1.7; }
+
+  /* ── SPECIALTIES ── */
+  #especialidades { background: var(--bg2); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5px;
+    margin-top: 3.5rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .service-card {
+    background: var(--surface);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: var(--accent);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .service-card:hover { background: var(--surface2); }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-icon {
+    font-size: 1.8rem; margin-bottom: 1rem;
+    display: block;
+  }
+  .service-title {
+    font-family: var(--font-sans); font-size: 1rem; font-weight: 700;
+    color: var(--text); margin-bottom: 0.5rem; letter-spacing: 0.02em;
+  }
+  .service-desc { font-size: 0.9rem; color: var(--text2); line-height: 1.65; }
+
+  /* ── METHOD ── */
+  #metodo { background: var(--bg); }
+  .method-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+    margin-top: 3.5rem; align-items: start;
+  }
+  .method-points { display: flex; flex-direction: column; gap: 2rem; }
+  .method-point { display: flex; gap: 1.25rem; align-items: flex-start; }
+  .method-num {
+    font-family: var(--font-display); font-size: 2.5rem;
+    color: var(--accent-dim);
+    line-height: 1; flex-shrink: 0;
+    width: 3rem; text-align: right;
+    color: var(--accent2);
+    opacity: 0.25;
+  }
+  .method-text-title {
+    font-family: var(--font-sans); font-size: 0.95rem; font-weight: 700;
+    color: var(--text); margin-bottom: 0.35rem;
+  }
+  .method-text-body { font-size: 0.9rem; color: var(--text2); }
+  .method-highlight {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2.5rem;
+    position: sticky; top: 7rem;
+  }
+  .highlight-quote {
+    font-family: var(--font-display); font-size: 1.4rem; font-style: italic;
+    color: var(--text); line-height: 1.45; margin-bottom: 1.25rem;
+  }
+  .highlight-quote::before { content: '"'; color: var(--accent2); }
+  .highlight-quote::after { content: '"'; color: var(--accent2); }
+  .highlight-author { font-size: 0.82rem; color: var(--text3); letter-spacing: 0.06em; text-transform: uppercase; font-family: var(--font-sans); }
+
+  /* ── REVIEWS ── */
+  #resenas { background: var(--bg2); }
+  .reviews-header { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; }
+  .rating-big {
+    display: flex; align-items: baseline; gap: 0.5rem;
+  }
+  .rating-num {
+    font-family: var(--font-display); font-size: 4rem; color: var(--accent2); line-height: 1;
+  }
+  .rating-label { font-size: 0.85rem; color: var(--text3); font-family: var(--font-sans); }
+  .stars { color: var(--accent2); font-size: 1.1rem; letter-spacing: 2px; }
+  .reviews-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  .review-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: border-color 0.2s;
+  }
+  .review-card:hover { border-color: var(--border2); }
+  .review-stars { color: var(--accent2); font-size: 0.85rem; margin-bottom: 0.75rem; letter-spacing: 2px; }
+  .review-text { font-size: 0.9rem; color: var(--text2); line-height: 1.65; margin-bottom: 1rem; font-style: italic; }
+  .review-author { font-family: var(--font-sans); font-size: 0.78rem; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  /* ── CONTACT ── */
+  #contacto { background: var(--bg); }
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem;
+    margin-top: 3.5rem; align-items: start;
+  }
+  .contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+  .contact-item { display: flex; gap: 1rem; align-items: flex-start; }
+  .contact-icon {
+    width: 40px; height: 40px; border-radius: 8px;
+    background: var(--accent-dim); border: 1px solid var(--border2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0;
+  }
+  .contact-item-label {
+    font-family: var(--font-sans); font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3);
+    margin-bottom: 2px;
+  }
+  .contact-item-value { font-size: 0.95rem; color: var(--text); text-decoration: none; }
+  .contact-item-value:hover { color: var(--accent2); }
+
+  .whatsapp-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--font-sans); font-size: 0.85rem; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 0.85rem 1.75rem;
+    background: #25D366; color: #fff;
+    border-radius: 4px; text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    margin-top: 0.5rem;
+  }
+  .whatsapp-btn:hover { background: #20b85a; transform: translateY(-2px); }
+
+  /* FORM */
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label {
+    font-family: var(--font-sans); font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--text3);
+  }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    font-family: var(--font-body); font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+    appearance: none;
+  }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: var(--text3); }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus { border-color: var(--accent); }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .form-submit {
+    font-family: var(--font-sans); font-size: 0.85rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0.85rem 2rem;
+    background: var(--accent); color: #fff;
+    border: none; border-radius: 4px; cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    align-self: flex-start;
+  }
+  .form-submit:hover { background: var(--accent2); transform: translateY(-2px); }
+  .form-note { font-size: 0.78rem; color: var(--text3); margin-top: 0.25rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-logo {
+    font-family: var(--font-sans); font-weight: 700; font-size: 0.9rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent2);
+  }
+  footer p { font-size: 0.78rem; color: var(--text3); }
+  footer a { color: var(--text3); font-size: 0.78rem; text-decoration: none; }
+  footer a:hover { color: var(--accent2); }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── MOBILE NAV ── */
+  .mobile-nav {
+    display: none;
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(13,20,16,0.97);
+    z-index: 200;
+    flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a {
+    font-family: var(--font-sans); font-size: 1.5rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--text2);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .mobile-nav a:hover { color: var(--accent2); }
+  .mobile-nav-close {
+    position: absolute; top: 1.5rem; right: 2rem;
+    background: none; border: none; color: var(--text2);
+    font-size: 1.5rem; cursor: pointer;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .method-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+    nav { padding: 1rem 1.25rem; }
+    section { padding: 4rem 1.25rem; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV DESKTOP -->
+<nav>
+  <a class="nav-logo" href="#">Naturagna</a>
+  <ul class="nav-links">
+    <li><a href="#especialidades">Especialidades</a></li>
+    <li><a href="#metodo">Método</a></li>
+    <li><a href="#resenas">Reseñas</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a class="nav-cta" href="#contacto">Reserva sesión</a>
+  <button class="hamburger" aria-label="Menú" onclick="document.getElementById('mobileNav').classList.add('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- NAV MOBILE -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" onclick="document.getElementById('mobileNav').classList.remove('open')">✕</button>
+  <a href="#especialidades" onclick="document.getElementById('mobileNav').classList.remove('open')">Especialidades</a>
+  <a href="#metodo" onclick="document.getElementById('mobileNav').classList.remove('open')">Método</a>
+  <a href="#resenas" onclick="document.getElementById('mobileNav').classList.remove('open')">Reseñas</a>
+  <a href="#contacto" onclick="document.getElementById('mobileNav').classList.remove('open')">Contacto</a>
+  <a class="nav-cta" href="#contacto" onclick="document.getElementById('mobileNav').classList.remove('open')">Reserva sesión</a>
+</div>
+
+<!-- HERO -->
+<section>
+  <div class="hero">
+    <span class="hero-badge">Adiestramiento · Sant Boi de Llobregat</span>
+    <h1>Tu perro feliz.<br>Tu casa <em>en paz.</em></h1>
+    <p class="hero-sub">Resultados desde la primera sesión. Sin trucos raros, sin castigos. Hacemos equipo para que tú y tu perro disfruten juntos.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#contacto">Reserva tu primera sesión →</a>
+      <a class="btn-secondary" href="#metodo">Cómo trabajamos</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">5.0</div>
+        <div class="stat-label">Valoración media</div>
+      </div>
+      <div>
+        <div class="stat-num">59</div>
+        <div class="stat-label">Reseñas verificadas</div>
+      </div>
+      <div>
+        <div class="stat-num">1ª</div>
+        <div class="stat-label">Sesión con resultados</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ESPECIALIDADES -->
+<section id="especialidades">
+  <div class="container">
+    <span class="section-tag reveal">Especialidades</span>
+    <h2 class="section-title reveal reveal-delay-1">Lo que solucionamos</h2>
+    <p class="section-sub reveal reveal-delay-2">Cada perro es distinto. Trabajamos el problema concreto de tu animal con pautas prácticas y reales para el día a día.</p>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <span class="service-icon">🏠</span>
+        <div class="service-title">Ansiedad por separación</div>
+        <p class="service-desc">¿Muebles destrozados? ¿Vecinos quejándose? Trabajamos para que tu perro aprenda a estar tranquilo cuando te vas.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <span class="service-icon">🐶</span>
+        <div class="service-title">Control de cachorros</div>
+        <p class="service-desc">Hiperactividad, mordidas, tirones en el paseo. Ponemos orden desde el principio para que crecer sea fácil para todos.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <span class="service-icon">🤝</span>
+        <div class="service-title">Convivencia y socialización</div>
+        <p class="service-desc">Introducción de personas nuevas, niños, otros perros. Gestión de jerarquías y conflictos dentro del hogar.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <span class="service-icon">🎒</span>
+        <div class="service-title">Transportín y herramientas</div>
+        <p class="service-desc">Enseñamos a tu perro a usar el transportín sin estrés y trabajamos con refuerzo positivo en todo el proceso.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MÉTODO -->
+<section id="metodo">
+  <div class="container">
+    <span class="section-tag reveal">El método</span>
+    <h2 class="section-title reveal reveal-delay-1">Sin venderle la moto a nadie</h2>
+    <div class="method-grid">
+      <div class="method-points">
+        <div class="method-point reveal">
+          <div class="method-num">01</div>
+          <div>
+            <div class="method-text-title">Diagnóstico honesto</div>
+            <p class="method-text-body">Antes de nada, entendemos qué pasa de verdad. Sin exagerar el problema ni prometerte lo imposible.</p>
+          </div>
+        </div>
+        <div class="method-point reveal reveal-delay-1">
+          <div class="method-num">02</div>
+          <div>
+            <div class="method-text-title">Refuerzo positivo</div>
+            <p class="method-text-body">Trabajamos desde el disfrute del animal. Aprendizaje que funciona y que no genera miedo ni estrés.</p>
+          </div>
+        </div>
+        <div class="method-point reveal reveal-delay-2">
+          <div class="method-num">03</div>
+          <div>
+            <div class="method-text-title">Pautas para ti</div>
+            <p class="method-text-body">Te damos herramientas concretas para aplicar en casa. El trabajo continúa fuera de la sesión.</p>
+          </div>
+        </div>
+        <div class="method-point reveal reveal-delay-3">
+          <div class="method-num">04</div>
+          <div>
+            <div class="method-text-title">Resultados desde el primer día</div>
+            <p class="method-text-body">No hace falta esperar meses. Muchos clientes notan la diferencia en la primera sesión.</p>
+          </div>
+        </div>
+      </div>
+      <div class="method-highlight reveal reveal-delay-2">
+        <p class="highlight-quote">No intentan vender más sesiones de las necesarias. Honestidad ante todo.</p>
+        <div class="highlight-author">— Valoración verificada de Google</div>
+        <div style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid var(--border);">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:0.5rem;">
+            <div style="display:flex; gap:2px; color:var(--accent2); font-size:0.9rem;">★★★★★</div>
+            <span style="font-size:0.78rem; color:var(--text3); font-family:var(--font-sans); text-transform:uppercase; letter-spacing:0.06em;">59 reseñas · 5.0/5</span>
+          </div>
+          <p style="font-size:0.85rem; color:var(--text2);">Tete y su equipo en Sant Boi de Llobregat. Adiestrador de referencia para cientos de familias en el Baix Llobregat.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEÑAS -->
+<section id="resenas">
+  <div class="container">
+    <div class="reviews-header">
+      <div>
+        <span class="section-tag reveal">Reseñas</span>
+        <h2 class="section-title reveal reveal-delay-1">Lo que dicen los clientes</h2>
+      </div>
+      <div class="rating-big reveal">
+        <div>
+          <div class="stars">★★★★★</div>
+          <div style="display:flex;align-items:baseline;gap:6px;margin-top:4px;">
+            <span class="rating-num">5.0</span>
+            <span class="rating-label">· 59 reseñas en Google</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Llevaba meses con mi perro destruyendo el sofá cada vez que salía. Después de la primera sesión ya noté un cambio enorme. Totalmente recomendable.</p>
+        <div class="review-author">— Cliente verificado</div>
+      </div>
+      <div class="review-card reveal reveal-delay-1">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Tete es un crack. No te vende sesiones que no necesitas y te da pautas claras y directas. Mi cachorro es otro desde que empezamos.</p>
+        <div class="review-author">— Cliente verificado</div>
+      </div>
+      <div class="review-card reveal reveal-delay-2">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Lo que más me sorprendió fue la honestidad. Te explica exactamente qué pasa y qué tienes que hacer tú. Resultados rápidos y sin historias.</p>
+        <div class="review-author">— Cliente verificado</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="container">
+    <span class="section-tag reveal">Contacto</span>
+    <h2 class="section-title reveal reveal-delay-1">Reserva tu sesión</h2>
+    <p class="section-sub reveal reveal-delay-2">Cuéntanos qué está pasando con tu perro y hablamos. Sin compromiso.</p>
+    <div class="contact-grid">
+      <div class="contact-info reveal reveal-delay-1">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-item-label">Dirección</div>
+            <span class="contact-item-value">Carrer Rosselló, 93-95<br>08830 Sant Boi de Llobregat, Barcelona</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <div class="contact-item-label">Teléfono</div>
+            <a class="contact-item-value" href="tel:+34673486383">673 48 63 83</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📸</div>
+          <div>
+            <div class="contact-item-label">Instagram</div>
+            <a class="contact-item-value" href="https://instagram.com/naturagna" target="_blank">@naturagna</a>
+          </div>
+        </div>
+        <a class="whatsapp-btn" href="https://wa.me/34673486383?text=Hola%2C%20me%20gustar%C3%ADa%20informarme%20sobre%20el%20adiestramiento%20para%20mi%20perro." target="_blank">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Escríbenos por WhatsApp
+        </a>
+      </div>
+      <form class="contact-form reveal reveal-delay-2" action="https://formspree.io/f/XXXXXXXX" method="POST">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+          </div>
+          <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono" placeholder="600 000 000">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="tuemail@ejemplo.com" required>
+        </div>
+        <div class="form-group">
+          <label for="problema">¿Qué problema tiene tu perro?</label>
+          <select id="problema" name="problema">
+            <option value="" disabled selected>Selecciona una opción</option>
+            <option>Ansiedad por separación</option>
+            <option>Control de cachorro</option>
+            <option>Convivencia / socialización</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="mensaje">Cuéntanos más</label>
+          <textarea id="mensaje" name="mensaje" placeholder="Explícanos brevemente la situación..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Enviar consulta →</button>
+        <p class="form-note">Te respondemos en menos de 24h.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">Naturagna</span>
+  <p>Carrer Rosselló, 93-95 · Sant Boi de Llobregat · 673 48 63 83</p>
+  <a href="https://webs.akidojo.dev" target="_blank">Creado por AkiWebs</a>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
