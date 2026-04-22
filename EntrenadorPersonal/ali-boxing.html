@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Ali Promotions Boxing Club — Escuela de boxeo en Les Corts, Barcelona. Todas las edades, todos los niveles. Técnica, disciplina y condición física.">
+<meta property="og:title" content="Ali Promotions Boxing Club · Barcelona">
+<meta property="og:description" content="Entrena boxeo en Barcelona con el mejor ambiente. Todas las edades, todos los niveles.">
+<meta property="og:type" content="website">
+<title>Ali Promotions Boxing Club · Barcelona</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0a;
+    --bg2: #111111;
+    --bg3: #181818;
+    --surface: #1a1a1a;
+    --surface2: #222222;
+    --accent: #c8102e;
+    --accent2: #e8253f;
+    --accent-dim: rgba(200,16,46,0.12);
+    --text: #f0f0f0;
+    --text2: #999;
+    --text3: #555;
+    --border: rgba(255,255,255,0.06);
+    --border2: rgba(200,16,46,0.3);
+    --gold: #d4a017;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-cond: 'Barlow Condensed', sans-serif;
+    --font-body: 'Barlow', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.1rem 2rem;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    letter-spacing: 0.06em;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-family: var(--font-cond);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--text2);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    font-family: var(--font-cond);
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.55rem 1.5rem;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  }
+  .nav-cta:hover { background: var(--accent2); transform: translateY(-1px); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--text2); border-radius: 1px; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 0 2rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(to bottom, rgba(10,10,10,0.4) 0%, rgba(10,10,10,0.2) 40%, rgba(10,10,10,0.85) 75%, var(--bg) 100%),
+      linear-gradient(135deg, rgba(200,16,46,0.08) 0%, transparent 50%);
+    background-color: #1a1a1a;
+  }
+  /* Diagonal red slash decorative */
+  .hero-slash {
+    position: absolute; top: 0; right: 10%; width: 3px; height: 100%;
+    background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+    opacity: 0.4;
+    transform: skewX(-12deg);
+  }
+  .hero-slash2 {
+    position: absolute; top: 0; right: calc(10% + 24px); width: 1px; height: 100%;
+    background: linear-gradient(to bottom, transparent, rgba(200,16,46,0.3), transparent);
+    transform: skewX(-12deg);
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; width: 100%; }
+  .hero-eyebrow {
+    font-family: var(--font-cond);
+    font-size: 0.85rem; font-weight: 700;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem; display: block;
+    opacity: 0; transform: translateY(12px);
+    animation: fadeUp 0.5s ease 0.1s forwards;
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(5rem, 13vw, 12rem);
+    line-height: 0.9;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+    opacity: 0; transform: translateY(20px);
+    animation: fadeUp 0.6s ease 0.25s forwards;
+  }
+  .hero h1 .line2 { display: block; color: var(--accent); margin-left: 0.05em; }
+  .hero-meta {
+    display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
+    margin-bottom: 2rem;
+    opacity: 0; transform: translateY(16px);
+    animation: fadeUp 0.6s ease 0.4s forwards;
+  }
+  .hero-meta-item {
+    font-family: var(--font-cond); font-size: 0.9rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--text2);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .hero-meta-item::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+  .hero-actions {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    opacity: 0; transform: translateY(16px);
+    animation: fadeUp 0.6s ease 0.55s forwards;
+  }
+  .btn-primary {
+    font-family: var(--font-cond); font-size: 1rem; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 0.9rem 2.25rem;
+    background: var(--accent); color: #fff;
+    border: none; border-radius: 2px; cursor: pointer; text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-2px); }
+  .btn-secondary {
+    font-family: var(--font-cond); font-size: 1rem; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 0.9rem 2.25rem;
+    background: transparent; color: var(--text);
+    border: 1px solid var(--border2); border-radius: 2px; cursor: pointer; text-decoration: none;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+  /* ── SECTIONS ── */
+  section { padding: 5rem 2rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-tag {
+    font-family: var(--font-cond); font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent);
+    margin-bottom: 0.5rem; display: block;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 6vw, 5rem);
+    line-height: 0.95; color: var(--text); margin-bottom: 1rem;
+    letter-spacing: 0.02em;
+  }
+  .section-sub { font-size: 1rem; color: var(--text2); max-width: 52ch; line-height: 1.7; }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    background: var(--accent);
+    padding: 1.25rem 2rem;
+  }
+  .stats-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+  }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: var(--font-display); font-size: 2.5rem; color: #fff; line-height: 1;
+  }
+  .stat-label {
+    font-family: var(--font-cond); font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.7);
+  }
+  .stat-divider { width: 1px; height: 40px; background: rgba(255,255,255,0.25); }
+
+  /* ── CLASES ── */
+  #clases { background: var(--bg2); }
+  .classes-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1px; margin-top: 3.5rem;
+    background: var(--border);
+  }
+  .class-card {
+    background: var(--bg2);
+    padding: 2.25rem 2rem;
+    position: relative; overflow: hidden;
+    transition: background 0.3s;
+  }
+  .class-card:hover { background: var(--surface2); }
+  .class-card-num {
+    font-family: var(--font-display); font-size: 5rem; color: rgba(200,16,46,0.08);
+    position: absolute; top: -0.5rem; right: 1rem;
+    line-height: 1; pointer-events: none;
+    transition: color 0.3s;
+  }
+  .class-card:hover .class-card-num { color: rgba(200,16,46,0.15); }
+  .class-tag {
+    font-family: var(--font-cond); font-size: 0.7rem; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.75rem; display: block;
+  }
+  .class-title {
+    font-family: var(--font-display); font-size: 1.8rem; color: var(--text);
+    margin-bottom: 0.75rem; line-height: 1;
+  }
+  .class-desc { font-size: 0.9rem; color: var(--text2); line-height: 1.65; }
+  .class-divider {
+    width: 32px; height: 2px; background: var(--accent);
+    margin: 1rem 0;
+  }
+
+  /* ── ALI ── */
+  #entrenador { background: var(--bg); }
+  .ali-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+    margin-top: 3.5rem; align-items: center;
+  }
+  .ali-visual {
+    position: relative;
+  }
+  .ali-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    padding: 2.5rem;
+    border-radius: 2px;
+  }
+  .ali-name {
+    font-family: var(--font-display); font-size: 4rem; color: var(--text); line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+  .ali-role {
+    font-family: var(--font-cond); font-size: 0.85rem; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+  .ali-rating {
+    display: flex; align-items: baseline; gap: 8px; margin-bottom: 1.25rem;
+  }
+  .ali-rating-num {
+    font-family: var(--font-display); font-size: 3rem; color: var(--gold); line-height: 1;
+  }
+  .ali-rating-label { font-size: 0.82rem; color: var(--text3); font-family: var(--font-cond); letter-spacing: 0.06em; text-transform: uppercase; }
+  .ali-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .ali-tag {
+    font-family: var(--font-cond); font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    background: var(--accent-dim); color: var(--accent);
+    border: 1px solid var(--border2); border-radius: 2px;
+  }
+  .ali-text { display: flex; flex-direction: column; gap: 1.25rem; }
+  .ali-text p { font-size: 1rem; color: var(--text2); line-height: 1.7; }
+  .ali-quote {
+    font-family: var(--font-cond); font-size: 1.35rem; font-style: italic;
+    color: var(--text); line-height: 1.4;
+    border-left: 3px solid var(--accent); padding-left: 1.25rem;
+    font-weight: 500;
+  }
+
+  /* ── REVIEWS ── */
+  #resenas { background: var(--bg2); }
+  .reviews-top {
+    display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .big-rating {
+    font-family: var(--font-display); font-size: 6rem; color: var(--gold); line-height: 1;
+  }
+  .reviews-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1px;
+    background: var(--border);
+  }
+  .review-card {
+    background: var(--bg2); padding: 1.75rem;
+    transition: background 0.25s;
+  }
+  .review-card:hover { background: var(--surface); }
+  .review-stars { color: var(--gold); letter-spacing: 2px; margin-bottom: 0.75rem; font-size: 0.9rem; }
+  .review-text { font-size: 0.9rem; color: var(--text2); line-height: 1.65; font-style: italic; margin-bottom: 1rem; }
+  .review-author {
+    font-family: var(--font-cond); font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3);
+  }
+  .tags-row {
+    display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 2.5rem;
+  }
+  .tag-pill {
+    font-family: var(--font-cond); font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    background: transparent; color: var(--text3);
+    border: 1px solid var(--border); border-radius: 1px;
+  }
+
+  /* ── HORARIOS ── */
+  #horarios { background: var(--bg); }
+  .schedule-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+    margin-top: 3rem;
+  }
+  .schedule-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 2px; padding: 2rem;
+  }
+  .schedule-card-title {
+    font-family: var(--font-display); font-size: 2rem; color: var(--text);
+    margin-bottom: 1rem; line-height: 1;
+  }
+  .schedule-row {
+    display: flex; justify-content: space-between;
+    padding: 0.5rem 0; border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+  }
+  .schedule-row:last-child { border-bottom: none; }
+  .schedule-day { color: var(--text2); font-family: var(--font-cond); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; font-size: 0.85rem; }
+  .schedule-time { color: var(--text); font-weight: 500; }
+  .open-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--font-cond); font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: #22c55e; margin-bottom: 1.5rem;
+  }
+  .open-badge::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #22c55e; animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(0.7);} }
+
+  /* ── CONTACTO ── */
+  #contacto { background: var(--bg2); }
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem;
+    margin-top: 3.5rem; align-items: start;
+  }
+  .contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+  .contact-item { display: flex; gap: 1rem; align-items: flex-start; }
+  .contact-icon {
+    width: 40px; height: 40px;
+    background: var(--accent-dim); border: 1px solid var(--border2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0; border-radius: 2px;
+  }
+  .contact-item-label {
+    font-family: var(--font-cond); font-size: 0.7rem; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--text3); margin-bottom: 2px;
+  }
+  .contact-item-value { font-size: 0.95rem; color: var(--text); text-decoration: none; }
+  .contact-item-value:hover { color: var(--accent); }
+  .whatsapp-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--font-cond); font-size: 0.9rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.85rem 1.75rem;
+    background: #25D366; color: #fff;
+    border-radius: 2px; text-decoration: none;
+    transition: background 0.2s, transform 0.15s; margin-top: 0.5rem;
+  }
+  .whatsapp-btn:hover { background: #20b85a; transform: translateY(-2px); }
+
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label {
+    font-family: var(--font-cond); font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3);
+  }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 2px; padding: 0.75rem 1rem;
+    color: var(--text); font-family: var(--font-body); font-size: 0.9rem;
+    outline: none; transition: border-color 0.2s; width: 100%; appearance: none;
+  }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: var(--text3); }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--accent); }
+  .form-group textarea { resize: vertical; min-height: 110px; }
+  .form-submit {
+    font-family: var(--font-cond); font-size: 0.95rem; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 0.9rem 2.25rem;
+    background: var(--accent); color: #fff;
+    border: none; border-radius: 2px; cursor: pointer;
+    transition: background 0.2s, transform 0.15s; align-self: flex-start;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+  .form-submit:hover { background: var(--accent2); transform: translateY(-2px); }
+  .form-note { font-size: 0.78rem; color: var(--text3); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #000;
+    border-top: 2px solid var(--accent);
+    padding: 2rem;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-logo {
+    font-family: var(--font-display); font-size: 1.4rem; letter-spacing: 0.06em; color: var(--text);
+  }
+  .footer-logo span { color: var(--accent); }
+  footer p { font-size: 0.78rem; color: var(--text3); }
+  footer a { color: var(--text3); font-size: 0.78rem; text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── MOBILE NAV ── */
+  .mobile-nav {
+    display: none; position: fixed; inset: 0;
+    background: rgba(10,10,10,0.98);
+    z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a {
+    font-family: var(--font-display); font-size: 2.5rem; color: var(--text2);
+    text-decoration: none; transition: color 0.2s; letter-spacing: 0.06em;
+  }
+  .mobile-nav a:hover { color: var(--accent); }
+  .mobile-nav-close {
+    position: absolute; top: 1.5rem; right: 2rem;
+    background: none; border: none; color: var(--text2); font-size: 1.5rem; cursor: pointer;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .ali-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .schedule-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .stats-inner { justify-content: center; gap: 1.5rem; }
+    .stat-divider { display: none; }
+    nav { padding: 1rem 1.25rem; }
+    section { padding: 4rem 1.25rem; }
+    footer { flex-direction: column; text-align: center; }
+    .reviews-top { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">ALI <span>BOXING</span></a>
+  <ul class="nav-links">
+    <li><a href="#clases">Clases</a></li>
+    <li><a href="#entrenador">Entrenador</a></li>
+    <li><a href="#resenas">Reseñas</a></li>
+    <li><a href="#horarios">Horarios</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a class="nav-cta" href="#contacto">Primera clase gratis</a>
+  <button class="hamburger" aria-label="Menú" onclick="document.getElementById('mobileNav').classList.add('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" onclick="document.getElementById('mobileNav').classList.remove('open')">✕</button>
+  <a href="#clases" onclick="document.getElementById('mobileNav').classList.remove('open')">Clases</a>
+  <a href="#entrenador" onclick="document.getElementById('mobileNav').classList.remove('open')">Entrenador</a>
+  <a href="#resenas" onclick="document.getElementById('mobileNav').classList.remove('open')">Reseñas</a>
+  <a href="#horarios" onclick="document.getElementById('mobileNav').classList.remove('open')">Horarios</a>
+  <a href="#contacto" onclick="document.getElementById('mobileNav').classList.remove('open')">Contacto</a>
+</div>
+
+<!-- HERO -->
+<section style="padding:0;">
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-slash"></div>
+    <div class="hero-slash2"></div>
+    <div class="hero-content">
+      <span class="hero-eyebrow">Les Corts · Barcelona · Desde el primer round</span>
+      <h1>ALI<span class="line2">BOXING</span></h1>
+      <div class="hero-meta">
+        <div class="hero-meta-item">Todas las edades</div>
+        <div class="hero-meta-item">Todos los niveles</div>
+        <div class="hero-meta-item">Les Corts, Barcelona</div>
+      </div>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#contacto">Primera clase gratis →</a>
+        <a class="btn-secondary" href="#clases">Ver clases</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">4.6</div>
+      <div class="stat-label">Valoración Google</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <div class="stat-num">21</div>
+      <div class="stat-label">Reseñas verificadas</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <div class="stat-num">10/10</div>
+      <div class="stat-label">Entrenador Ali</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <div class="stat-num">0€</div>
+      <div class="stat-label">Primera clase</div>
+    </div>
+  </div>
+</div>
+
+<!-- CLASES -->
+<section id="clases">
+  <div class="container">
+    <span class="section-tag reveal">Modalidades</span>
+    <h2 class="section-title reveal reveal-delay-1">Elige tu round</h2>
+    <p class="section-sub reveal reveal-delay-2">Boxeo para todos. Da igual si nunca has puesto un guante o si llevas años en el ring.</p>
+    <div class="classes-grid">
+      <div class="class-card reveal">
+        <span class="class-card-num">01</span>
+        <span class="class-tag">Principiantes</span>
+        <div class="class-title">Boxeo Base</div>
+        <div class="class-divider"></div>
+        <p class="class-desc">Aprende la técnica desde cero. Guardia, desplazamientos, golpes básicos. Sin presión, a tu ritmo.</p>
+      </div>
+      <div class="class-card reveal reveal-delay-1">
+        <span class="class-card-num">02</span>
+        <span class="class-tag">Fitness</span>
+        <div class="class-title">Box Fit</div>
+        <div class="class-divider"></div>
+        <p class="class-desc">El mejor cardio que vas a encontrar. Trabaja la condición física, quema calorías y desconecta.</p>
+      </div>
+      <div class="class-card reveal reveal-delay-2">
+        <span class="class-card-num">03</span>
+        <span class="class-tag">Técnica avanzada</span>
+        <div class="class-title">Sparring y Competición</div>
+        <div class="class-divider"></div>
+        <p class="class-desc">Para los que quieren subir de nivel. Trabajo en el ring, estrategia y preparación para competir.</p>
+      </div>
+      <div class="class-card reveal reveal-delay-3">
+        <span class="class-card-num">04</span>
+        <span class="class-tag">Todas las edades</span>
+        <div class="class-title">Boxeo Infantil</div>
+        <div class="class-divider"></div>
+        <p class="class-desc">Disciplina, respeto y actividad física desde pequeños. El deporte que enseña más que a pegar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENTRENADOR ALI -->
+<section id="entrenador">
+  <div class="container">
+    <span class="section-tag reveal">El entrenador</span>
+    <h2 class="section-title reveal reveal-delay-1">Ali, 10 de 10</h2>
+    <div class="ali-grid">
+      <div class="ali-visual reveal reveal-delay-1">
+        <div class="ali-card">
+          <div class="ali-name">Ali</div>
+          <div class="ali-role">Head Coach · Ali Promotions Boxing Club</div>
+          <div class="ali-rating">
+            <div class="ali-rating-num">10</div>
+            <div class="ali-rating-label">/ 10 · valorado por sus alumnos</div>
+          </div>
+          <div class="ali-tags">
+            <span class="ali-tag">Disciplina</span>
+            <span class="ali-tag">Técnica</span>
+            <span class="ali-tag">Profesionalidad</span>
+            <span class="ali-tag">Trato humano</span>
+          </div>
+        </div>
+      </div>
+      <div class="ali-text reveal reveal-delay-2">
+        <blockquote class="ali-quote">Energía positiva, respeto y disciplina. Así describe el ambiente quien entrena aquí.</blockquote>
+        <p>Ali no es solo un entrenador técnico. Sus alumnos destacan su trato personal, su forma de motivar y el ambiente que ha creado en el gimnasio: competitivo pero sin toxicidad.</p>
+        <p>El enfoque es claro: mejorar de verdad. Cada clase tiene propósito, y se nota desde el primer día que pisas el gimnasio.</p>
+        <a class="btn-primary" href="#contacto" style="margin-top:0.5rem;">Entrenar con Ali →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEÑAS -->
+<section id="resenas">
+  <div class="container">
+    <div class="reviews-top">
+      <div>
+        <span class="section-tag reveal">Reseñas</span>
+        <h2 class="section-title reveal reveal-delay-1">Lo que dice el ring</h2>
+      </div>
+      <div class="reveal">
+        <div class="big-rating">4.6</div>
+        <div style="color:var(--gold);font-size:1rem;letter-spacing:3px;">★★★★★</div>
+        <div style="font-family:var(--font-cond);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-top:4px;">21 reseñas en Google</div>
+      </div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Ali es un entrenador 10 de 10. Técnica impecable y un trato increíble. Te hace sentir cómodo desde el primer día aunque no hayas boxeado nunca.</p>
+        <div class="review-author">— Cliente verificado</div>
+      </div>
+      <div class="review-card reveal reveal-delay-1">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">El mejor gimnasio de boxeo del barrio. Ambiente de respeto, disciplina y mucha energía positiva. He mejorado más en dos meses que en años de gym convencional.</p>
+        <div class="review-author">— Cliente verificado</div>
+      </div>
+      <div class="review-card reveal reveal-delay-2">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Llevo a mi hijo desde los 10 años y el cambio ha sido brutal. Más disciplinado, más seguro de sí mismo. Ali tiene mucho mérito en eso.</p>
+        <div class="review-author">— Cliente verificado</div>
+      </div>
+    </div>
+    <div class="tags-row reveal">
+      <span class="tag-pill">Disciplina</span>
+      <span class="tag-pill">Condición física</span>
+      <span class="tag-pill">Nivel técnico</span>
+      <span class="tag-pill">Ambiente</span>
+      <span class="tag-pill">Todas las edades</span>
+    </div>
+  </div>
+</section>
+
+<!-- HORARIOS -->
+<section id="horarios">
+  <div class="container">
+    <span class="section-tag reveal">Horarios</span>
+    <h2 class="section-title reveal reveal-delay-1">Cuándo entrenar</h2>
+    <div class="open-badge reveal reveal-delay-2">Abierto ahora · Cierra a las 21:00</div>
+    <div class="schedule-grid">
+      <div class="schedule-card reveal reveal-delay-1">
+        <div class="schedule-card-title">Lunes — Viernes</div>
+        <div class="schedule-row"><span class="schedule-day">Mañanas</span><span class="schedule-time">09:00 – 12:00</span></div>
+        <div class="schedule-row"><span class="schedule-day">Mediodía</span><span class="schedule-time">12:30 – 14:00</span></div>
+        <div class="schedule-row"><span class="schedule-day">Tardes</span><span class="schedule-time">17:00 – 21:00</span></div>
+      </div>
+      <div class="schedule-card reveal reveal-delay-2">
+        <div class="schedule-card-title">Fin de semana</div>
+        <div class="schedule-row"><span class="schedule-day">Sábado</span><span class="schedule-time">10:00 – 14:00</span></div>
+        <div class="schedule-row"><span class="schedule-day">Domingo</span><span class="schedule-time">Consultar</span></div>
+        <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);">
+          <p style="font-size:0.85rem;color:var(--text3);">* Horarios orientativos. Confirma disponibilidad por WhatsApp antes de venir.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="container">
+    <span class="section-tag reveal">Contacto</span>
+    <h2 class="section-title reveal reveal-delay-1">Primera clase, gratis</h2>
+    <p class="section-sub reveal reveal-delay-2">Sin compromisos. Ven, conoce el gimnasio y decide si es lo tuyo.</p>
+    <div class="contact-grid">
+      <div class="contact-info reveal reveal-delay-1">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-item-label">Dirección</div>
+            <span class="contact-item-value">Carrer de Novell, 24<br>Les Corts, 08028 Barcelona</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <div class="contact-item-label">Teléfono</div>
+            <a class="contact-item-value" href="tel:+34687075304">687 07 53 04</a>
+          </div>
+        </div>
+        <a class="whatsapp-btn" href="https://wa.me/34687075304?text=Hola%2C%20me%20gustar%C3%ADa%20apuntarme%20a%20una%20primera%20clase%20gratuita%20en%20Ali%20Promotions%20Boxing%20Club." target="_blank">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Apúntate por WhatsApp
+        </a>
+      </div>
+      <form class="contact-form reveal reveal-delay-2" action="https://formspree.io/f/XXXXXXXX" method="POST">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+          </div>
+          <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono" placeholder="600 000 000">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="tuemail@ejemplo.com" required>
+        </div>
+        <div class="form-group">
+          <label for="nivel">Tu nivel</label>
+          <select id="nivel" name="nivel">
+            <option value="" disabled selected>¿Cuánto has boxeado?</option>
+            <option>Nunca he entrenado boxeo</option>
+            <option>Tengo algo de base</option>
+            <option>Entreno habitualmente</option>
+            <option>Quiero competir</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="mensaje">¿Algo más que quieras contarnos?</label>
+          <textarea id="mensaje" name="mensaje" placeholder="Edad, objetivo, horario preferido..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Reservar primera clase →</button>
+        <p class="form-note">Te respondemos en menos de 24h. La primera clase es gratis.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">ALI <span>BOXING</span></span>
+  <p>Carrer de Novell, 24 · Les Corts · Barcelona · 687 07 53 04</p>
+  <a href="https://webs.akidojo.dev" target="_blank">Creado por AkiWebs</a>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
