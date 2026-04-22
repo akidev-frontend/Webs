@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Silvia Mestre — Entrenadora Personal & Coach · Lleida</title>
+<meta name="description" content="Entrenadora personal y coach en Lleida. Entrenamiento personalizado, coaching y masajes. 5★ en Google. 622 11 86 40."/>
+<meta property="og:title" content="Silvia Mestre — Entrenadora Personal & Coach"/>
+<meta property="og:description" content="Tu mejor versión, en Lleida."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+
+<style>
+/* ═══════════════════════════════════════════
+   RESET & TOKENS
+═══════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:   #0a0c0f;
+  --bg2:  #0e1115;
+  --bg3:  #13171d;
+  --accent: #d4f72e;
+  --accent-glow: rgba(212,247,46,.18);
+  --accent-soft: rgba(212,247,46,.10);
+  --border: rgba(255,255,255,.08);
+  --border-soft: rgba(255,255,255,.04);
+  --text:  #f0ede6;
+  --muted: rgba(240,237,230,.45);
+  --muted2: rgba(240,237,230,.25);
+  --surface: rgba(255,255,255,.03);
+  --surface2: rgba(255,255,255,.06);
+  --geist: 'Geist', sans-serif;
+  --serif: 'Instrument Serif', serif;
+  --mono:  'JetBrains Mono', monospace;
+  --r: 12px;
+  --pad: 2.5rem;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--geist);
+  font-weight: 400;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══════════════════════════════════════════
+   LAYOUT HELPERS
+═══════════════════════════════════════════ */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--pad);
+}
+
+/* ═══════════════════════════════════════════
+   CURSOR — solo en dispositivos con mouse
+═══════════════════════════════════════════ */
+@media (pointer: fine) {
+  body { cursor: none; }
+  .cursor-dot, .cursor-ring { display: block; }
+}
+@media (pointer: coarse) {
+  body { cursor: auto; }
+  .cursor-dot, .cursor-ring { display: none !important; }
+}
+.cursor-dot {
+  position: fixed; width: 5px; height: 5px;
+  background: var(--accent); border-radius: 50%;
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%,-50%);
+}
+.cursor-ring {
+  position: fixed; width: 32px; height: 32px;
+  border: 1px solid rgba(212,247,46,.5); border-radius: 50%;
+  pointer-events: none; z-index: 9998;
+  transform: translate(-50%,-50%);
+  transition: width .25s, height .25s, border-color .25s, opacity .25s;
+}
+.cursor-ring.grow { width: 48px; height: 48px; border-color: var(--accent); }
+
+/* ═══════════════════════════════════════════
+   NAVBAR
+═══════════════════════════════════════════ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: 68px;
+  transition: background .35s, border-color .35s, backdrop-filter .35s;
+  border-bottom: 1px solid transparent;
+}
+.nav-inner {
+  max-width: 1200px; margin: 0 auto;
+  padding: 0 var(--pad); height: 100%;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav.scrolled {
+  background: rgba(10,12,15,.88);
+  backdrop-filter: blur(16px);
+  border-color: var(--border);
+}
+.nav-logo {
+  font-family: var(--geist); font-weight: 700; font-size: 1rem;
+  letter-spacing: .01em; color: var(--text); text-decoration: none;
+}
+.nav-logo span { color: var(--accent); }
+.nav-links {
+  display: flex; align-items: center; gap: 2rem; list-style: none;
+}
+.nav-links a {
+  font-family: var(--mono); font-size: .68rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--muted); text-decoration: none;
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-cta {
+  font-family: var(--mono); font-size: .68rem; letter-spacing: .08em;
+  text-transform: uppercase; font-weight: 500;
+  background: var(--accent); color: #000;
+  padding: .55rem 1.4rem; border-radius: 4px;
+  text-decoration: none;
+  transition: background .2s, transform .15s;
+}
+.nav-cta:hover { background: #c8e82a; transform: translateY(-1px); }
+.nav-burger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+}
+.nav-burger span {
+  display: block; width: 22px; height: 1.5px;
+  background: var(--text); transition: all .3s; border-radius: 2px;
+}
+.mobile-nav {
+  display: none; position: fixed; inset: 0; z-index: 150;
+  background: var(--bg); flex-direction: column;
+  align-items: center; justify-content: center; gap: 2.5rem;
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav a {
+  font-family: var(--geist); font-weight: 600; font-size: 2rem;
+  color: var(--text); text-decoration: none; transition: color .2s;
+}
+.mobile-nav a:hover { color: var(--accent); }
+.mobile-nav .close-btn {
+  position: absolute; top: 1.5rem; right: 2rem;
+  background: none; border: none; cursor: pointer;
+  font-size: 1.5rem; color: var(--muted);
+}
+
+/* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  position: relative; overflow: hidden;
+  padding-top: 68px;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,.12) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse 75% 80% at 50% 40%, black 20%, transparent 100%);
+}
+.hero-spotlight {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: radial-gradient(
+    700px circle at var(--sx, 30%) var(--sy, 50%),
+    rgba(212,247,46,.065) 0%, transparent 65%
+  );
+}
+.hero-inner {
+  max-width: 1200px; margin: 0 auto;
+  padding: 4rem var(--pad);
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 4rem; align-items: center;
+  width: 100%; position: relative; z-index: 2;
+}
+.hero-left { display: flex; flex-direction: column; }
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-family: var(--mono); font-size: .65rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid rgba(212,247,46,.25);
+  padding: .35rem .9rem; border-radius: 999px;
+  width: fit-content; margin-bottom: 2.5rem;
+  animation: fadeUp .6s .1s both;
+}
+.badge-pulse {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent); animation: pulse 2.2s infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%      { opacity:.3; transform:scale(.6); }
+}
+
+.hero-headline {
+  font-family: var(--geist); font-weight: 800;
+  font-size: clamp(2.8rem, 5.5vw, 5.5rem);
+  line-height: 1.02; letter-spacing: -.03em;
+  animation: fadeUp .6s .18s both;
+}
+.hero-headline .serif-line {
+  font-family: var(--serif); font-style: italic;
+  font-weight: 400; color: var(--accent); display: block;
+}
+.hero-sub {
+  margin-top: 1.8rem; max-width: 420px;
+  font-size: 1.05rem; line-height: 1.75;
+  color: var(--muted); font-weight: 300;
+  animation: fadeUp .6s .28s both;
+}
+.hero-actions {
+  display: flex; align-items: center; gap: 1.5rem;
+  margin-top: 2.8rem; flex-wrap: wrap;
+  animation: fadeUp .6s .38s both;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-family: var(--geist); font-weight: 600; font-size: .95rem;
+  background: var(--accent); color: #000;
+  padding: .85rem 2rem; border-radius: 6px;
+  text-decoration: none;
+  transition: background .2s, transform .15s, box-shadow .2s;
+}
+.btn-primary:hover { background: #c8e82a; transform: translateY(-2px); box-shadow: 0 12px 32px rgba(212,247,46,.25); }
+.btn-secondary {
+  font-family: var(--geist); font-weight: 400; font-size: .95rem;
+  color: var(--muted); text-decoration: none;
+  display: flex; align-items: center; gap: .4rem;
+  transition: color .2s;
+}
+.btn-secondary:hover { color: var(--text); }
+
+.hero-pills {
+  display: flex; align-items: center; gap: .6rem;
+  margin-top: 2.2rem; flex-wrap: wrap;
+  animation: fadeUp .6s .46s both;
+}
+.hero-pill {
+  font-family: var(--mono); font-size: .62rem; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--muted2);
+  border: 1px solid var(--border); border-radius: 999px;
+  padding: .3rem .75rem;
+}
+.hero-stats {
+  display: flex; gap: 2.5rem;
+  margin-top: 3.5rem; padding-top: 2.5rem;
+  border-top: 1px solid var(--border);
+  animation: fadeUp .6s .54s both;
+  flex-wrap: wrap;
+}
+.hero-stat-val {
+  font-family: var(--geist); font-weight: 800;
+  font-size: 2.4rem; line-height: 1; color: var(--accent);
+  letter-spacing: -.03em;
+}
+.hero-stat-lbl {
+  font-family: var(--mono); font-size: .58rem;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--muted); margin-top: .35rem;
+}
+
+/* hero right */
+.hero-right { position: relative; height: 560px; }
+.hero-img-wrap {
+  position: absolute; bottom: 0; left: 10%;
+  width: 80%; height: 100%;
+  display: flex; align-items: flex-end; justify-content: center;
+}
+.hero-img {
+  width: 100%; height: 100%;
+  background: linear-gradient(170deg, #181c22 0%, #0d1014 100%);
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 16px 16px 0 0;
+  border: 1px solid var(--border); border-bottom: none;
+}
+.hero-img::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    -45deg, transparent, transparent 24px,
+    rgba(255,255,255,.018) 24px, rgba(255,255,255,.018) 25px
+  );
+}
+.hero-img-label {
+  font-family: var(--mono); font-size: .62rem; letter-spacing: .18em;
+  text-transform: uppercase; color: rgba(255,255,255,.12); z-index: 1;
+}
+.hero-float {
+  position: absolute; top: 3rem; right: -1rem;
+  background: rgba(14,17,21,.92); backdrop-filter: blur(20px);
+  border: 1px solid var(--border); border-radius: 12px;
+  padding: 1rem 1.3rem;
+  animation: fadeUp .7s .8s both;
+}
+.hero-float-stars { color: var(--accent); font-size: .85rem; letter-spacing: .05em; margin-bottom: .3rem; }
+.hero-float-val { font-family: var(--geist); font-weight: 800; font-size: 1.4rem; line-height: 1; letter-spacing: -.02em; }
+.hero-float-lbl { font-family: var(--mono); font-size: .52rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-top: .2rem; }
+.hero-corner {
+  position: absolute; bottom: 3rem; left: -1rem;
+  border: 1.5px solid var(--accent); width: 60px; height: 60px;
+  opacity: .4; animation: fadeUp .7s .9s both;
+}
+.hero-ghost {
+  position: absolute; bottom: -1.5rem; left: -1rem;
+  font-family: var(--geist); font-weight: 900;
+  font-size: clamp(5rem, 11vw, 11rem); letter-spacing: -.04em; line-height: 1;
+  color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.04);
+  pointer-events: none; z-index: 1; animation: fadeUp .8s 1s both;
+}
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(20px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* ═══════════════════════════════════════════
+   MARQUEE
+═══════════════════════════════════════════ */
+.marquee-wrap {
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg2); padding: .75rem 0;
+}
+.marquee-track {
+  display: flex; white-space: nowrap;
+  animation: marquee-scroll 28s linear infinite;
+}
+.marquee-item {
+  display: inline-flex; align-items: center; gap: 1.8rem;
+  padding-right: 1.8rem;
+  font-family: var(--mono); font-size: .62rem;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--muted);
+}
+.marquee-item .dot { color: var(--accent); }
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ═══════════════════════════════════════════
+   SECTION LABELS
+═══════════════════════════════════════════ */
+.section-label {
+  display: flex; align-items: center; gap: 1rem;
+  font-family: var(--mono); font-size: .62rem;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 1.5rem;
+}
+.section-label::before {
+  content: ''; display: block; width: 24px; height: 1px;
+  background: var(--accent);
+}
+.section-title {
+  font-family: var(--geist); font-weight: 800;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.1; letter-spacing: -.02em;
+}
+.section-title em {
+  font-family: var(--serif); font-style: italic;
+  font-weight: 400; color: var(--accent);
+}
+
+/* ═══════════════════════════════════════════
+   SERVICES — BENTO GRID
+═══════════════════════════════════════════ */
+.services-section { padding: 7rem 0; background: var(--bg); }
+.services-header {
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: end; gap: 2rem; margin-bottom: 3.5rem;
+}
+.services-desc {
+  font-size: .95rem; color: var(--muted);
+  line-height: 1.75; max-width: 380px; justify-self: end;
+}
+.bento-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+}
+.bento-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r); padding: 2.2rem;
+  position: relative; overflow: hidden;
+  transition: border-color .3s, background .3s, transform .25s;
+}
+.bento-card:hover {
+  border-color: rgba(212,247,46,.2);
+  background: rgba(212,247,46,.025);
+  transform: translateY(-3px);
+}
+.bento-card::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  border-radius: var(--r);
+  background: radial-gradient(260px circle at var(--cx,50%) var(--cy,50%), rgba(212,247,46,.07), transparent 65%);
+  opacity: 0; transition: opacity .3s;
+}
+.bento-card:hover::after { opacity: 1; }
+.bento-card::before {
+  content: ''; position: absolute; top: 0; left: 1.5rem; right: 1.5rem; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  transform: scaleX(0); transition: transform .4s ease;
+}
+.bento-card:hover::before { transform: scaleX(1); }
+
+.bento-card.tall { grid-row: span 2; display: flex; flex-direction: column; justify-content: space-between; }
+.bento-card.wide { grid-column: span 2; }
+
+.card-icon { font-size: 1.8rem; margin-bottom: 1.2rem; display: block; }
+.card-num {
+  position: absolute; top: 1.5rem; right: 1.8rem;
+  font-family: var(--geist); font-weight: 900; font-size: 4rem; line-height: 1;
+  color: rgba(255,255,255,.04); pointer-events: none;
+}
+.card-title {
+  font-family: var(--geist); font-weight: 700; font-size: 1.35rem;
+  letter-spacing: -.01em; margin-bottom: .75rem; line-height: 1.2;
+}
+.card-desc { font-size: .88rem; color: var(--muted); line-height: 1.75; font-weight: 300; }
+.card-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1.3rem; }
+.card-tag {
+  font-family: var(--mono); font-size: .58rem; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--muted2);
+  border: 1px solid var(--border); border-radius: 4px;
+  padding: .22rem .6rem; transition: border-color .2s, color .2s;
+}
+.bento-card:hover .card-tag { border-color: rgba(212,247,46,.25); color: var(--accent); }
+.card-stat-val {
+  font-family: var(--geist); font-weight: 800; font-size: 3.5rem;
+  line-height: 1; letter-spacing: -.04em; color: var(--accent);
+}
+.card-stat-lbl {
+  font-family: var(--mono); font-size: .58rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--muted); margin-top: .4rem;
+}
+.card-tagline {
+  font-family: var(--serif); font-style: italic;
+  font-size: 1.45rem; color: var(--muted); line-height: 1.4;
+}
+.card-tagline strong { font-style: normal; font-family: var(--geist); font-weight: 700; color: var(--text); }
+.card-cta {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-family: var(--geist); font-weight: 600; font-size: .9rem;
+  color: var(--accent); text-decoration: none; margin-top: 1.5rem;
+  transition: gap .2s;
+}
+.card-cta:hover { gap: .8rem; }
+
+/* ═══════════════════════════════════════════
+   ABOUT
+═══════════════════════════════════════════ */
+.about-section { padding: 7rem 0; background: var(--bg2); }
+.about-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 var(--pad);
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 5rem; align-items: center;
+}
+.about-img-col { position: relative; }
+.about-img {
+  width: 100%; aspect-ratio: 3/4;
+  background: var(--bg3); border-radius: var(--r);
+  border: 1px solid var(--border);
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.about-img::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(170deg, #181c22, #0d1014);
+}
+.about-img-placeholder {
+  font-family: var(--mono); font-size: .62rem; letter-spacing: .18em;
+  text-transform: uppercase; color: rgba(255,255,255,.12); z-index: 1;
+}
+.about-img-corner {
+  position: absolute; bottom: -1rem; right: -1rem;
+  width: 80px; height: 80px;
+  border: 1.5px solid var(--accent); border-radius: 4px; opacity: .5;
+}
+.about-img-badge {
+  position: absolute; top: -1rem; left: -1rem;
+  background: var(--accent); color: #000;
+  border-radius: 8px; padding: .9rem 1.1rem;
+  font-family: var(--geist); font-weight: 800; z-index: 10;
+}
+.about-img-badge .badge-num { font-size: 2rem; line-height: 1; display: block; letter-spacing: -.04em; }
+.about-img-badge .badge-text { font-family: var(--mono); font-size: .5rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 500; display: block; margin-top: .1rem; }
+.about-pull {
+  font-family: var(--geist); font-weight: 800;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  line-height: 1.15; letter-spacing: -.02em; margin-bottom: 2rem;
+}
+.about-pull em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--accent); }
+.about-body { font-size: .93rem; color: var(--muted); line-height: 1.8; margin-bottom: 1.3rem; font-weight: 300; }
+.about-list { list-style: none; display: flex; flex-direction: column; gap: .7rem; margin-top: 2rem; }
+.about-list li {
+  display: flex; align-items: center; gap: .9rem;
+  font-size: .9rem; color: var(--text); font-weight: 400;
+}
+.about-list li::before { content: ''; width: 16px; height: 1px; background: var(--accent); flex-shrink: 0; }
+
+/* ═══════════════════════════════════════════
+   TESTIMONIALS
+═══════════════════════════════════════════ */
+.testimonials-section { padding: 7rem 0; background: var(--bg); overflow: hidden; }
+.testimonials-header {
+  max-width: 1200px; margin: 0 auto 3.5rem;
+  padding: 0 var(--pad);
+  display: flex; align-items: flex-end; justify-content: space-between;
+}
+.testi-rating {
+  font-family: var(--mono); font-size: .62rem;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+  display: flex; flex-direction: column; align-items: flex-end; gap: .3rem;
+}
+.testi-rating-val {
+  font-family: var(--geist); font-weight: 800;
+  font-size: 2rem; line-height: 1; color: var(--accent); letter-spacing: -.03em;
+}
+.testi-rows { display: flex; flex-direction: column; gap: 1rem; }
+.testi-row { overflow: hidden; }
+.testi-inner {
+  display: flex; gap: 1rem; white-space: nowrap;
+  animation: marquee-scroll 35s linear infinite;
+}
+.testi-row.row2 .testi-inner { animation-direction: reverse; animation-duration: 30s; }
+.testi-card {
+  display: inline-flex; flex-direction: column;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r); padding: 1.6rem 1.8rem;
+  min-width: 320px; max-width: 320px;
+  white-space: normal; flex-shrink: 0;
+  transition: border-color .3s; vertical-align: top;
+}
+.testi-card:hover { border-color: rgba(212,247,46,.2); }
+.testi-stars { color: var(--accent); font-size: .75rem; letter-spacing: .05em; margin-bottom: .9rem; }
+.testi-text { font-size: .87rem; line-height: 1.7; color: rgba(240,237,230,.75); font-weight: 300; flex: 1; }
+.testi-footer {
+  display: flex; align-items: center; gap: .75rem;
+  margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid var(--border);
+}
+.testi-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--bg3); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--geist); font-weight: 700; font-size: .85rem;
+  color: var(--accent); flex-shrink: 0;
+}
+.testi-name { font-family: var(--mono); font-size: .6rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.testi-duration { margin-left: auto; font-family: var(--mono); font-size: .55rem; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.18); }
+
+/* ═══════════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════════ */
+.contact-section { padding: 7rem 0; background: var(--bg2); }
+.contact-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 var(--pad);
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 5rem; align-items: start;
+}
+.contact-pull {
+  font-family: var(--geist); font-weight: 800;
+  font-size: clamp(1.6rem, 3vw, 2.5rem);
+  line-height: 1.1; letter-spacing: -.02em; margin-bottom: 1.5rem;
+}
+.contact-pull em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--accent); }
+.contact-desc { font-size: .93rem; color: var(--muted); line-height: 1.75; margin-bottom: 2.5rem; font-weight: 300; }
+.contact-items { display: flex; flex-direction: column; gap: 1.2rem; }
+.contact-item {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1rem 1.2rem;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+  text-decoration: none; transition: border-color .25s, background .25s;
+}
+.contact-item:hover { border-color: rgba(212,247,46,.25); background: var(--surface2); }
+.contact-item-icon { font-size: 1.1rem; flex-shrink: 0; }
+.contact-item-label { font-family: var(--mono); font-size: .55rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); display: block; }
+.contact-item-value { font-family: var(--geist); font-weight: 600; font-size: .95rem; color: var(--text); display: block; margin-top: .15rem; }
+.contact-form { display: flex; flex-direction: column; gap: 1rem; }
+.form-group { display: flex; flex-direction: column; gap: .45rem; }
+.form-label { font-family: var(--mono); font-size: .6rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.form-input, .form-select, .form-textarea {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
+  color: var(--text); font-family: var(--geist); font-size: .93rem; font-weight: 300;
+  padding: .8rem 1rem; transition: border-color .2s, background .2s; outline: none;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: rgba(212,247,46,.4); background: var(--surface2);
+}
+.form-input::placeholder, .form-textarea::placeholder { color: var(--muted2); }
+.form-select option { background: var(--bg2); color: var(--text); }
+.form-textarea { resize: vertical; min-height: 110px; }
+.form-submit {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  font-family: var(--geist); font-weight: 600; font-size: .95rem;
+  background: var(--accent); color: #000;
+  padding: .9rem; border: none; border-radius: 6px;
+  cursor: pointer; transition: background .2s, transform .15s, box-shadow .2s;
+  margin-top: .5rem;
+}
+.form-submit:hover { background: #c8e82a; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(212,247,46,.25); }
+
+/* ═══════════════════════════════════════════
+   INFO BAR
+═══════════════════════════════════════════ */
+.info-bar { background: var(--accent); padding: 1.1rem 0; }
+.info-bar-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 var(--pad);
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 2rem; flex-wrap: wrap;
+}
+.info-bar-item { display: flex; align-items: center; gap: .65rem; }
+.info-bar-item span {
+  font-family: var(--mono); font-size: .65rem; letter-spacing: .1em;
+  text-transform: uppercase; color: rgba(0,0,0,.75); font-weight: 500;
+}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+footer { background: #060709; border-top: 1px solid var(--border); }
+.footer-inner {
+  max-width: 1200px; margin: 0 auto; padding: 2rem var(--pad);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem;
+}
+.footer-logo { font-family: var(--geist); font-weight: 700; font-size: .95rem; color: var(--muted); letter-spacing: .01em; }
+.footer-logo span { color: var(--accent); }
+.footer-copy { font-family: var(--mono); font-size: .58rem; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.15); }
+.footer-credit {
+  font-family: var(--mono); font-size: .58rem; letter-spacing: .08em;
+  text-transform: uppercase; color: rgba(255,255,255,.15); text-decoration: none;
+  transition: color .2s;
+}
+.footer-credit:hover { color: var(--accent); }
+
+/* ═══════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════ */
+.reveal    { opacity:0; transform:translateY(24px); transition: opacity .65s ease, transform .65s ease; }
+.reveal-l  { opacity:0; transform:translateX(-24px); transition: opacity .65s ease, transform .65s ease; }
+.reveal-r  { opacity:0; transform:translateX(24px); transition: opacity .65s ease, transform .65s ease; }
+.reveal.in, .reveal-l.in, .reveal-r.in { opacity:1; transform:translate(0,0); }
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE — TABLET  600–959px
+═══════════════════════════════════════════ */
+@media (min-width: 600px) and (max-width: 959px) {
+  :root { --pad: 2rem; }
+
+  /* nav */
+  .nav-links, .nav-cta { display: none; }
+  .nav-burger { display: flex; }
+
+  /* hero: una columna, sin foto */
+  .hero-inner {
+    grid-template-columns: 1fr;
+    padding: 5rem var(--pad) 4rem;
+    gap: 0;
+  }
+  .hero-right { display: none; }
+  .hero-headline { font-size: clamp(2.6rem, 7vw, 4.2rem); }
+  .hero-sub { max-width: 100%; font-size: 1rem; }
+  .hero-stats { gap: 2rem; }
+  .hero-stat-val { font-size: 2rem; }
+
+  /* services */
+  .services-section { padding: 5rem 0; }
+  .services-header { grid-template-columns: 1fr; gap: 1rem; margin-bottom: 2.5rem; }
+  .services-desc { justify-self: start; max-width: 100%; }
+
+  /* bento: 2 columnas en tablet, sin wide/tall */
+  .bento-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: auto;
+  }
+  .bento-card.wide { grid-column: span 2; }
+  .bento-card.tall { grid-row: auto; display: flex; flex-direction: column; }
+
+  /* about: dos columnas más compactas */
+  .about-section { padding: 5rem 0; }
+  .about-inner {
+    grid-template-columns: 280px 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+  .about-img { aspect-ratio: 2/3; }
+  .about-img-corner { display: none; }
+  .about-img-badge { top: -.6rem; left: -.6rem; padding: .6rem .8rem; }
+  .about-img-badge .badge-num { font-size: 1.5rem; }
+  .about-img-badge .badge-text { font-size: .45rem; }
+  .about-pull { font-size: clamp(1.4rem, 3.5vw, 2rem); }
+  .about-body { font-size: .88rem; }
+  .about-list li { font-size: .84rem; }
+
+  /* testimonials */
+  .testimonials-section { padding: 5rem 0; }
+  .testimonials-header { flex-direction: column; align-items: flex-start; gap: 1rem; margin-bottom: 2.5rem; }
+  .testi-rating { align-items: flex-start; }
+
+  /* contact */
+  .contact-section { padding: 5rem 0; }
+  .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+
+  /* info bar */
+  .info-bar-inner { justify-content: center; gap: 1rem; }
+  .info-bar-item:nth-child(4) { display: none; } /* quita el último en tablet */
+
+  /* footer */
+  .footer-inner { flex-direction: column; align-items: center; text-align: center; }
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE — MOBILE  < 600px
+═══════════════════════════════════════════ */
+@media (max-width: 599px) {
+  :root { --pad: 1.25rem; }
+
+  /* nav */
+  .nav-inner { padding: 0 var(--pad); }
+  .nav-links, .nav-cta { display: none; }
+  .nav-burger { display: flex; }
+
+  /* hero */
+  .hero-inner {
+    grid-template-columns: 1fr;
+    padding: 5rem var(--pad) 3.5rem;
+    gap: 0;
+  }
+  .hero-right { display: none; }
+  .hero-badge { font-size: .6rem; }
+  .hero-headline { font-size: clamp(2.2rem, 10vw, 3.2rem); }
+  .hero-sub { font-size: .92rem; max-width: 100%; }
+  .hero-actions { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .btn-primary { width: 100%; justify-content: center; }
+  .hero-pills { gap: .4rem; }
+  .hero-pill { font-size: .55rem; }
+  .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+  .hero-stat-val { font-size: 1.8rem; }
+  .hero-stat-lbl { font-size: .52rem; }
+
+  /* services */
+  .services-section { padding: 4rem 0; }
+  .services-header { grid-template-columns: 1fr; gap: 1rem; margin-bottom: 2rem; }
+  .services-desc { justify-self: start; max-width: 100%; font-size: .88rem; }
+
+  /* bento: 1 columna */
+  .bento-grid { grid-template-columns: 1fr; }
+  .bento-card.wide { grid-column: 1; }
+  .bento-card.tall { grid-row: auto; }
+  .bento-card { padding: 1.6rem; }
+  .card-title { font-size: 1.15rem; }
+  .card-stat-val { font-size: 2.8rem; }
+
+  /* about: 1 columna */
+  .about-section { padding: 4rem 0; }
+  .about-inner {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    padding: 0 var(--pad);
+  }
+  .about-img-col { position: relative; max-width: 320px; margin: 0 auto; width: 100%; }
+  .about-img { aspect-ratio: 4/5; }
+  .about-img-corner { display: none; }
+  .about-img-badge { top: -.5rem; left: -.5rem; padding: .5rem .7rem; }
+  .about-img-badge .badge-num { font-size: 1.4rem; }
+  .about-img-badge .badge-text { font-size: .42rem; }
+  .about-pull { font-size: 1.6rem; }
+  .about-body { font-size: .88rem; }
+  .about-list li { font-size: .84rem; }
+
+  /* reveal-l y reveal-r en mobile van hacia arriba, no lateral */
+  .reveal-l { transform: translateY(24px); }
+  .reveal-r { transform: translateY(24px); }
+
+  /* testimonials */
+  .testimonials-section { padding: 4rem 0; }
+  .testimonials-header { padding: 0 var(--pad); flex-direction: column; align-items: flex-start; gap: 1rem; margin-bottom: 2rem; }
+  .testi-rating { align-items: flex-start; }
+  .testi-card { min-width: 270px; max-width: 270px; padding: 1.2rem 1.4rem; }
+  .testi-text { font-size: .82rem; }
+
+  /* contact */
+  .contact-section { padding: 4rem 0; }
+  .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; padding: 0 var(--pad); }
+  .contact-pull { font-size: 1.6rem; }
+
+  /* info bar */
+  .info-bar-inner {
+    flex-direction: column; align-items: flex-start;
+    padding: 0 var(--pad); gap: .75rem;
+  }
+  .info-bar-item:nth-child(3),
+  .info-bar-item:nth-child(4) { display: none; }
+
+  /* footer */
+  .footer-inner { flex-direction: column; align-items: center; text-align: center; gap: .75rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR — solo se muestra con mouse, el CSS lo oculta en touch -->
+<div class="cursor-dot" id="curDot"></div>
+<div class="cursor-ring" id="curRing"></div>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="close-btn" id="closeNav" aria-label="Cerrar">✕</button>
+  <a href="#servicios" onclick="document.getElementById('mobileNav').classList.remove('open')">Servicios</a>
+  <a href="#sobre" onclick="document.getElementById('mobileNav').classList.remove('open')">Sobre mí</a>
+  <a href="#opiniones" onclick="document.getElementById('mobileNav').classList.remove('open')">Reseñas</a>
+  <a href="#contacto" onclick="document.getElementById('mobileNav').classList.remove('open')">Contacto</a>
+</div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Silvia Mestre<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#sobre">Sobre mí</a></li>
+      <li><a href="#opiniones">Reseñas</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <a href="tel:622118640" class="nav-cta">622 11 86 40</a>
+    <button class="nav-burger" id="navBurger" aria-label="Menú"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ══════ HERO ══════ -->
+<section class="hero" id="hero">
+  <div class="hero-spotlight" id="heroSpot"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge">
+        <span class="badge-pulse"></span>
+        Entrenadora Personal · Lleida
+      </div>
+      <h1 class="hero-headline">
+        Tu mejor versión,<br>
+        <span class="serif-line">por dentro y fuera.</span>
+      </h1>
+      <p class="hero-sub">
+        Soy Silvia Mestre. Entrenadora personal y coach en Lleida. Te ayudo a conseguir lo que llevas tiempo posponiendo, a tu ritmo y sin excusas.
+      </p>
+      <div class="hero-actions">
+        <a href="#contacto" class="btn-primary">Reservar sesión →</a>
+        <a href="#servicios" class="btn-secondary">Ver servicios ↓</a>
+      </div>
+      <div class="hero-pills">
+        <span class="hero-pill">Presencial</span>
+        <span class="hero-pill">Plan 100% personalizado</span>
+        <span class="hero-pill">Principiantes bienvenidos</span>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-val" data-count="5" data-suffix=".0">0</div>
+          <div class="hero-stat-lbl">Estrellas · Google</div>
+        </div>
+        <div>
+          <div class="hero-stat-val" data-count="65" data-suffix="+">0</div>
+          <div class="hero-stat-lbl">Reseñas · Google</div>
+        </div>
+        <div>
+          <div class="hero-stat-val" data-count="100" data-suffix="%">0</div>
+          <div class="hero-stat-lbl">Personalizado</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-img-wrap">
+        <div class="hero-img">
+          <span class="hero-img-label">tu_foto.jpg</span>
+        </div>
+      </div>
+      <div class="hero-float">
+        <div class="hero-float-stars">★★★★★</div>
+        <div class="hero-float-val">5.0</div>
+        <div class="hero-float-lbl">Valoración media</div>
+      </div>
+      <div class="hero-corner"></div>
+      <div class="hero-ghost">FUERZA</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Entrenamiento Personal <span class="dot">·</span></span>
+    <span class="marquee-item">Coaching <span class="dot">·</span></span>
+    <span class="marquee-item">Masajes <span class="dot">·</span></span>
+    <span class="marquee-item">Lesiones & Recuperación <span class="dot">·</span></span>
+    <span class="marquee-item">Lleida <span class="dot">·</span></span>
+    <span class="marquee-item">622 11 86 40 <span class="dot">·</span></span>
+    <span class="marquee-item">5★ Google <span class="dot">·</span></span>
+    <span class="marquee-item">Adaptado a ti <span class="dot">·</span></span>
+    <span class="marquee-item">Entrenamiento Personal <span class="dot">·</span></span>
+    <span class="marquee-item">Coaching <span class="dot">·</span></span>
+    <span class="marquee-item">Masajes <span class="dot">·</span></span>
+    <span class="marquee-item">Lesiones & Recuperación <span class="dot">·</span></span>
+    <span class="marquee-item">Lleida <span class="dot">·</span></span>
+    <span class="marquee-item">622 11 86 40 <span class="dot">·</span></span>
+    <span class="marquee-item">5★ Google <span class="dot">·</span></span>
+    <span class="marquee-item">Adaptado a ti <span class="dot">·</span></span>
+  </div>
+</div>
+
+<!-- ══════ SERVICES ══════ -->
+<section class="services-section" id="servicios">
+  <div class="container">
+    <div class="services-header reveal">
+      <div>
+        <div class="section-label">Servicios</div>
+        <h2 class="section-title">Un método completo,<br>para un cambio <em>real.</em></h2>
+      </div>
+      <p class="services-desc">Tres áreas que trabajan juntas. El cuerpo avanza cuando todo lo demás también avanza.</p>
+    </div>
+
+    <div class="bento-grid">
+      <div class="bento-card wide reveal" style="transition-delay:.05s">
+        <span class="card-num">01</span>
+        <span class="card-icon">🏋️</span>
+        <h3 class="card-title">Entrenamiento Personal</h3>
+        <p class="card-desc">Planes 100% personalizados según tus objetivos, nivel y estilo de vida. Sin plantillas genéricas. Cada sesión diseñada para maximizar resultados.</p>
+        <div class="card-tags">
+          <span class="card-tag">Fuerza</span>
+          <span class="card-tag">Cardio</span>
+          <span class="card-tag">Pérdida de peso</span>
+          <span class="card-tag">Principiantes</span>
+          <span class="card-tag">Lesiones</span>
+        </div>
+      </div>
+
+      <div class="bento-card reveal" style="transition-delay:.1s">
+        <div class="card-stat-val">5.0★</div>
+        <div class="card-stat-lbl">Valoración media<br>en Google Maps</div>
+      </div>
+
+      <div class="bento-card tall reveal" style="transition-delay:.08s">
+        <div>
+          <span class="card-num">02</span>
+          <span class="card-icon">🧠</span>
+          <h3 class="card-title">Coaching & Hábitos</h3>
+          <p class="card-desc">El cuerpo cambia cuando la cabeza también lo hace. Trabajamos hábitos, metas personales y la mentalidad que lo sostiene todo.</p>
+          <div class="card-tags">
+            <span class="card-tag">Hábitos</span>
+            <span class="card-tag">Metas</span>
+            <span class="card-tag">Motivación</span>
+          </div>
+        </div>
+        <a href="#contacto" class="card-cta">Reservar sesión →</a>
+      </div>
+
+      <div class="bento-card reveal" style="transition-delay:.12s">
+        <span class="card-num">03</span>
+        <span class="card-icon">💆</span>
+        <h3 class="card-title">Masajes & Recuperación</h3>
+        <p class="card-desc">Recuperación activa y bienestar muscular. Para el postentrenamiento o para aliviar tensiones del día a día, en un entorno tranquilo.</p>
+        <div class="card-tags">
+          <span class="card-tag">Recuperación</span>
+          <span class="card-tag">Relajación</span>
+        </div>
+      </div>
+
+      <div class="bento-card reveal" style="transition-delay:.15s">
+        <p class="card-tagline">
+          <strong>Tú trabaja en lo tuyo.</strong><br>
+          La parte online y el método<br>los resolvemos juntas.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ ABOUT ══════ -->
+<section class="about-section" id="sobre">
+  <div class="about-inner">
+    <div class="about-img-col reveal-l">
+      <div class="about-img">
+        <span class="about-img-placeholder">tu_foto.jpg</span>
+      </div>
+      <div class="about-img-corner"></div>
+      <div class="about-img-badge">
+        <span class="badge-num">65+</span>
+        <span class="badge-text">Clientes</span>
+      </div>
+    </div>
+
+    <div class="about-content reveal-r">
+      <div class="section-label">Sobre mí</div>
+      <h2 class="about-pull">
+        No soy solo<br>una entrenadora <em>más.</em>
+      </h2>
+      <p class="about-body">
+        Soy Silvia Mestre, entrenadora personal y coach en Lleida. Trabajo con personas que llevan tiempo queriendo empezar, con quienes se han lesionado y quieren volver a moverse, y con quienes simplemente quieren encontrarse mejor.
+      </p>
+      <p class="about-body">
+        No hay fórmulas mágicas ni rutinas de copia y pega. Hay paciencia, conocimiento técnico y trabajo real adaptado a cada persona. Si llevas tiempo intentándolo solo, el problema no es tu fuerza de voluntad. <strong>Es el método.</strong>
+      </p>
+      <ul class="about-list">
+        <li>Especializada en principiantes y lesiones</li>
+        <li>Valoración 5.0 en Google Maps · 65+ reseñas</li>
+        <li>Centro propio · Carrer Dr. Combelles, 37 · Lleida</li>
+        <li>Horario ampliado hasta las 21:00</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ TESTIMONIALS ══════ -->
+<section class="testimonials-section" id="opiniones">
+  <div class="testimonials-header reveal">
+    <div>
+      <div class="section-label">Testimonios</div>
+      <h2 class="section-title">Ellas ya dieron <em>el paso.</em></h2>
+    </div>
+    <div class="testi-rating">
+      <div class="testi-rating-val">5.0</div>
+      <span>65+ reseñas en Google</span>
+    </div>
+  </div>
+
+  <div class="testi-rows">
+    <div class="testi-row row1">
+      <div class="testi-inner">
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">Empecé con más de 40 años sin haber hecho deporte en mi vida. Silvia tiene una paciencia increíble y se adaptó a mi nivel desde el primer día. No lo hubiera conseguido sola.</p><div class="testi-footer"><div class="testi-avatar">M</div><span class="testi-name">María G.</span><span class="testi-duration">Entrenamiento</span></div></div>
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">Persona excepcional. Conoce mucho su trabajo y siempre te explica el porqué de cada ejercicio. Llevo meses entrenando con ella y los resultados hablan por sí solos.</p><div class="testi-footer"><div class="testi-avatar">J</div><span class="testi-name">Joan P.</span><span class="testi-duration">Fuerza</span></div></div>
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">Venía con una lesión de espalda y no sabía si podría volver a entrenar con normalidad. Silvia diseñó todo el trabajo pensando en eso. Muy profesional y muy cercana.</p><div class="testi-footer"><div class="testi-avatar">A</div><span class="testi-name">Anna R.</span><span class="testi-duration">Lesión + Física</span></div></div>
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">Nunca pensé que a mi edad empezaría a cuidarme así. Silvia lo hace todo fácil, sin agobios. Es como si supiera exactamente lo que necesitas antes de que lo pidas.</p><div class="testi-footer"><div class="testi-avatar">C</div><span class="testi-name">Carmen V.</span><span class="testi-duration">Bienestar</span></div></div>
+        <!-- duplicados para loop -->
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">Empecé con más de 40 años sin haber hecho deporte en mi vida. Silvia tiene una paciencia increíble y se adaptó a mi nivel desde el primer día. No lo hubiera conseguido sola.</p><div class="testi-footer"><div class="testi-avatar">M</div><span class="testi-name">María G.</span><span class="testi-duration">Entrenamiento</span></div></div>
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">Persona excepcional. Conoce mucho su trabajo y siempre te explica el porqué de cada ejercicio. Llevo meses entrenando con ella y los resultados hablan por sí solos.</p><div class="testi-footer"><div class="testi-avatar">J</div><span class="testi-name">Joan P.</span><span class="testi-duration">Fuerza</span></div></div>
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">Venía con una lesión de espalda y no sabía si podría volver a entrenar con normalidad. Silvia diseñó todo el trabajo pensando en eso. Muy profesional y muy cercana.</p><div class="testi-footer"><div class="testi-avatar">A</div><span class="testi-name">Anna R.</span><span class="testi-duration">Lesión + Física</span></div></div>
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">Nunca pensé que a mi edad empezaría a cuidarme así. Silvia lo hace todo fácil, sin agobios. Es como si supiera exactamente lo que necesitas antes de que lo pidas.</p><div class="testi-footer"><div class="testi-avatar">C</div><span class="testi-name">Carmen V.</span><span class="testi-duration">Bienestar</span></div></div>
+      </div>
+    </div>
+
+    <div class="testi-row row2">
+      <div class="testi-inner">
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">Lo que más me sorprendió fue cómo adapta cada sesión. No es un plan genérico. Entiende qué te frena y trabaja desde ahí. Llevo 8 meses y no me planteo parar.</p><div class="testi-footer"><div class="testi-avatar">L</div><span class="testi-name">Laura M.</span><span class="testi-duration">8 meses</span></div></div>
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">Apasionada de su trabajo, se nota en cada sesión. Te empuja cuando toca y para cuando hay que parar. Un diez absoluto.</p><div class="testi-footer"><div class="testi-avatar">R</div><span class="testi-name">Rosa B.</span><span class="testi-duration">Coaching</span></div></div>
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">Con problemas de rodilla pensaba que no podría volver al gym. Silvia me demostró que sí, con cabeza y el plan adecuado. Estoy mejor que antes de la lesión.</p><div class="testi-footer"><div class="testi-avatar">P</div><span class="testi-name">Pere S.</span><span class="testi-duration">Rehabilitación</span></div></div>
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">Santa paciencia y un conocimiento brutal. Si tienes cualquier duda sobre ejercicio o tu cuerpo, ella lo sabe y te lo explica de forma que lo entiendes.</p><div class="testi-footer"><div class="testi-avatar">N</div><span class="testi-name">Núria T.</span><span class="testi-duration">Entrenamiento</span></div></div>
+        <!-- duplicados -->
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">Lo que más me sorprendió fue cómo adapta cada sesión. No es un plan genérico. Entiende qué te frena y trabaja desde ahí. Llevo 8 meses y no me planteo parar.</p><div class="testi-footer"><div class="testi-avatar">L</div><span class="testi-name">Laura M.</span><span class="testi-duration">8 meses</span></div></div>
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">Apasionada de su trabajo, se nota en cada sesión. Te empuja cuando toca y para cuando hay que parar. Un diez absoluto.</p><div class="testi-footer"><div class="testi-avatar">R</div><span class="testi-name">Rosa B.</span><span class="testi-duration">Coaching</span></div></div>
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">Con problemas de rodilla pensaba que no podría volver al gym. Silvia me demostró que sí, con cabeza y el plan adecuado. Estoy mejor que antes de la lesión.</p><div class="testi-footer"><div class="testi-avatar">P</div><span class="testi-name">Pere S.</span><span class="testi-duration">Rehabilitación</span></div></div>
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">Santa paciencia y un conocimiento brutal. Si tienes cualquier duda sobre ejercicio o tu cuerpo, ella lo sabe y te lo explica de forma que lo entiendes.</p><div class="testi-footer"><div class="testi-avatar">N</div><span class="testi-name">Núria T.</span><span class="testi-duration">Entrenamiento</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ CONTACT ══════ -->
+<section class="contact-section" id="contacto">
+  <div class="contact-inner">
+    <div class="contact-left reveal-l">
+      <div class="section-label">Contacto</div>
+      <h2 class="contact-pull">¿Lista para empezar <em>de verdad?</em></h2>
+      <p class="contact-desc">
+        Cuéntame tu situación y hablamos sin compromiso. Sin rodeos, sin plantillas. Solo una conversación honesta para ver cómo puedo ayudarte.
+      </p>
+      <div class="contact-items">
+        <a href="tel:622118640" class="contact-item">
+          <span class="contact-item-icon">📞</span>
+          <div class="contact-item-content">
+            <span class="contact-item-label">Teléfono</span>
+            <span class="contact-item-value">622 11 86 40</span>
+          </div>
+        </a>
+        <a href="https://maps.google.com/?q=Carrer+Dr+Combelles+37+Lleida" target="_blank" rel="noopener" class="contact-item">
+          <span class="contact-item-icon">📍</span>
+          <div class="contact-item-content">
+            <span class="contact-item-label">Dirección</span>
+            <span class="contact-item-value">Carrer Dr. Combelles, 37 · Lleida</span>
+          </div>
+        </a>
+        <div class="contact-item">
+          <span class="contact-item-icon">🕘</span>
+          <div class="contact-item-content">
+            <span class="contact-item-label">Horario</span>
+            <span class="contact-item-value">Abierto hasta las 21:00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-right reveal-r">
+      <form class="contact-form" action="https://formspree.io/f/XXXXXXXX" method="POST">
+        <div class="form-group">
+          <label class="form-label" for="nombre">Nombre</label>
+          <input class="form-input" type="text" id="nombre" name="nombre" placeholder="Tu nombre" required/>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="email">Email</label>
+          <input class="form-input" type="email" id="email" name="email" placeholder="tu@email.com" required/>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="servicio">¿En qué te ayudo?</label>
+          <select class="form-select" id="servicio" name="servicio">
+            <option value="" disabled selected>Selecciona un servicio</option>
+            <option value="entrenamiento">Entrenamiento personal</option>
+            <option value="coaching">Coaching y hábitos</option>
+            <option value="masajes">Masajes y recuperación</option>
+            <option value="todo">Varios servicios</option>
+            <option value="duda">No sé aún, necesito orientación</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="mensaje">Cuéntame tu situación</label>
+          <textarea class="form-textarea" id="mensaje" name="mensaje" placeholder="De dónde partes, qué quieres conseguir..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Enviar mensaje →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- INFO BAR -->
+<div class="info-bar">
+  <div class="info-bar-inner">
+    <div class="info-bar-item">📍 <span>Carrer Dr. Combelles, 37 · 25003 Lleida</span></div>
+    <div class="info-bar-item">📞 <span>622 11 86 40</span></div>
+    <div class="info-bar-item">🕘 <span>Abierto hasta las 21:00</span></div>
+    <div class="info-bar-item">⭐ <span>5.0 · 65+ reseñas Google</span></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <span class="footer-logo">Silvia Mestre<span>.</span></span>
+    <span class="footer-copy">© 2025 · Entrenadora Personal · Lleida</span>
+    <a href="https://webs.akidojo.dev" target="_blank" rel="noopener" class="footer-credit">Creado por AkiWebs</a>
+  </div>
+</footer>
+
+<script>
+/* ── Cursor (solo activo si pointer: fine, el CSS ya lo oculta en touch) ── */
+const dot  = document.getElementById('curDot');
+const ring = document.getElementById('curRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+if (window.matchMedia('(pointer: fine)').matches) {
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+    const hero = document.querySelector('.hero');
+    const spot = document.getElementById('heroSpot');
+    const r = hero.getBoundingClientRect();
+    if (my > r.top && my < r.bottom) {
+      spot.style.setProperty('--sx', ((mx - r.left) / hero.offsetWidth * 100).toFixed(1) + '%');
+      spot.style.setProperty('--sy', ((my - r.top) / hero.offsetHeight * 100).toFixed(1) + '%');
+    }
+  });
+
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('grow'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('grow'));
+  });
+
+  (function loop() {
+    rx += (mx - rx) * .1; ry += (my - ry) * .1;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(loop);
+  })();
+}
+
+/* ── Per-card spotlight ── */
+document.querySelectorAll('.bento-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--cx', (e.clientX - r.left) + 'px');
+    card.style.setProperty('--cy', (e.clientY - r.top) + 'px');
+  });
+});
+
+/* ── Nav scroll ── */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40), { passive: true });
+
+/* ── Mobile nav ── */
+document.getElementById('navBurger').addEventListener('click', () =>
+  document.getElementById('mobileNav').classList.add('open'));
+document.getElementById('closeNav').addEventListener('click', () =>
+  document.getElementById('mobileNav').classList.remove('open'));
+
+/* ── Counter animation ── */
+function animateCounter(el) {
+  const target = parseInt(el.dataset.count);
+  const suffix = el.dataset.suffix || '';
+  const duration = 1400;
+  const start = performance.now();
+  (function step(now) {
+    const p = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    el.textContent = (target === 5 ? (ease * 5).toFixed(1) : Math.round(ease * target)) + suffix;
+    if (p < 1) requestAnimationFrame(step);
+  })(start);
+}
+const counterObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { animateCounter(e.target); counterObs.unobserve(e.target); } });
+}, { threshold: .5 });
+document.querySelectorAll('[data-count]').forEach(el => counterObs.observe(el));
+
+/* ── Scroll reveal ── */
+const revObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); revObs.unobserve(e.target); } });
+}, { threshold: .08 });
+document.querySelectorAll('.reveal, .reveal-l, .reveal-r').forEach(el => revObs.observe(el));
+</script>
+</body>
+</html>
