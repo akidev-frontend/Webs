@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Miroytengo — Muebles que no arruinan tu cuenta</title>
+<meta name="description" content="Más de 2.700 muebles en stock. Entrega en 48h. Sin excusas para seguir viviendo con lo que te dejaron tus padres.">
+<meta property="og:title" content="Miroytengo — Muebles que no arruinan tu cuenta">
+<meta property="og:description" content="+2.700 productos. Entrega en 48h. Precios sin trampa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Geist:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080b10;
+  --bg2: #0c1018;
+  --surface: rgba(255,255,255,0.03);
+  --surface2: rgba(255,255,255,0.055);
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --text: #e8edf5;
+  --text-muted: #5a6478;
+  --text-dim: #8a95a8;
+  --accent: #3b6fff;
+  --accent2: #5a85ff;
+  --accent-glow: rgba(59,111,255,0.18);
+  --gold: #f0b429;
+  --r: 10px;
+  --r-lg: 18px;
+  --mx: 50%;
+  --my: 50%;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Geist', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* BG */
+.bg-layer { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+.bg-grid {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+.bg-radial {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 60% at var(--mx) var(--my), rgba(59,111,255,0.07) 0%, transparent 65%);
+}
+.bg-mask {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 100% 100% at 50% -10%, transparent 40%, var(--bg) 90%);
+}
+
+/* CURSOR */
+.cursor-dot {
+  position: fixed; width: 6px; height: 6px;
+  background: #fff; border-radius: 50%;
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%,-50%);
+}
+.cursor-ring {
+  position: fixed; width: 28px; height: 28px;
+  border: 1px solid rgba(255,255,255,0.3); border-radius: 50%;
+  pointer-events: none; z-index: 9998;
+  transform: translate(-50%,-50%);
+  transition: width .2s, height .2s, border-color .2s;
+}
+
+/* SCROLL PROGRESS */
+.scroll-progress {
+  position: fixed; top: 0; left: 0;
+  height: 2px; width: 0%;
+  background: linear-gradient(90deg, var(--accent), #7c5cfc);
+  z-index: 300;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 48px;
+  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+  background: rgba(8,11,16,0.75);
+  border-bottom: 1px solid transparent;
+  transition: border-color .4s, padding .3s;
+}
+nav.scrolled { border-color: var(--border); padding: 14px 48px; }
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif; font-size: 22px;
+  letter-spacing: 2px; color: var(--text); text-decoration: none;
+}
+.nav-logo span { color: var(--accent2); }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  font-size: 13px; font-weight: 400; color: var(--text-muted);
+  text-decoration: none; letter-spacing: 0.3px; transition: color .2s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-cta {
+  font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500;
+  color: var(--text); background: var(--accent); border: none;
+  padding: 10px 22px; border-radius: var(--r); cursor: none;
+  text-decoration: none; letter-spacing: 0.5px;
+  transition: background .2s, transform .2s, box-shadow .2s;
+}
+.nav-cta:hover { background: var(--accent2); transform: translateY(-1px); box-shadow: 0 6px 24px var(--accent-glow); }
+.hamburger { display: none; background: none; border: none; cursor: none; padding: 4px; }
+.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text-dim); margin: 5px 0; transition: .3s; }
+
+/* HERO */
+.hero {
+  position: relative; z-index: 1;
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 140px 48px 80px; text-align: center;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid var(--border2); border-radius: 100px;
+  padding: 6px 16px;
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  color: var(--text-dim); letter-spacing: 0.5px;
+  margin-bottom: 36px;
+  opacity: 0; animation: fadeUp .6s .1s forwards;
+}
+.hero-badge::before {
+  content: ''; width: 6px; height: 6px;
+  background: #22c55e; border-radius: 50%;
+  box-shadow: 0 0 8px #22c55e;
+  animation: blink 2s infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+.hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(64px, 11vw, 148px);
+  line-height: 0.92; letter-spacing: 2px; color: var(--text);
+  margin-bottom: 4px;
+  opacity: 0; animation: fadeUp .7s .2s forwards;
+}
+.hero-sub-line {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(64px, 11vw, 148px);
+  color: var(--text); letter-spacing: 2px; line-height: 0.92;
+  margin-bottom: 4px;
+  opacity: 0; animation: fadeUp .7s .3s forwards;
+}
+.hero-sub-line em {
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  color: transparent; -webkit-text-stroke: 1.5px rgba(90,133,255,0.7);
+  letter-spacing: 0;
+}
+.hero h1.last { margin-bottom: 40px; opacity: 0; animation: fadeUp .7s .35s forwards; }
+
+.hero-desc {
+  font-size: clamp(15px, 1.8vw, 18px); color: var(--text-dim);
+  max-width: 500px; font-weight: 300; line-height: 1.75; margin-bottom: 44px;
+  opacity: 0; animation: fadeUp .7s .45s forwards;
+}
+.hero-desc strong { color: var(--text); font-weight: 500; }
+
+.hero-actions {
+  display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+  opacity: 0; animation: fadeUp .6s .58s forwards;
+}
+.btn-main {
+  font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500;
+  letter-spacing: 0.5px; color: #fff; background: var(--accent); border: none;
+  padding: 15px 32px; border-radius: var(--r); cursor: none;
+  text-decoration: none; position: relative; overflow: hidden;
+  transition: transform .2s, box-shadow .2s, background .2s;
+}
+.btn-main::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.12), transparent);
+}
+.btn-main:hover { transform: translateY(-2px); box-shadow: 0 10px 32px var(--accent-glow); background: var(--accent2); }
+.btn-ghost {
+  font-family: 'JetBrains Mono', monospace; font-size: 13px;
+  letter-spacing: 0.5px; color: var(--text-dim); background: transparent;
+  border: 1px solid var(--border2); padding: 15px 28px; border-radius: var(--r);
+  cursor: none; text-decoration: none;
+  transition: color .2s, border-color .2s, transform .2s;
+}
+.btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.22); transform: translateY(-1px); }
+
+.hero-stats {
+  display: flex; gap: 56px; margin-top: 72px; padding-top: 48px;
+  border-top: 1px solid var(--border); justify-content: center; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp .6s .72s forwards;
+}
+.stat { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.stat-n { font-family: 'Bebas Neue', sans-serif; font-size: 42px; letter-spacing: 1px; color: var(--text); line-height: 1; }
+.stat-l { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase; }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+/* MARQUEE */
+.marquee-section {
+  position: relative; z-index: 1;
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  background: var(--bg2); overflow: hidden;
+}
+.marquee-row { display: flex; width: max-content; padding: 13px 0; }
+.marquee-row.fwd  { animation: mq-fwd  30s linear infinite; }
+.marquee-row.back { animation: mq-back 26s linear infinite; border-top: 1px solid var(--border); }
+.mq-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 0 28px; border-right: 1px solid var(--border);
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  color: var(--text-muted); letter-spacing: 1.5px; text-transform: uppercase; white-space: nowrap;
+}
+.mq-item .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent2); flex-shrink: 0; }
+@keyframes mq-fwd  { from{transform:translateX(0)}    to{transform:translateX(-50%)} }
+@keyframes mq-back { from{transform:translateX(-50%)} to{transform:translateX(0)}    }
+
+/* SECTIONS */
+.section { position: relative; z-index: 1; padding: 110px 48px; }
+.section.alt { background: var(--bg2); }
+.container { max-width: 1120px; margin: 0 auto; }
+
+.section-tag {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  color: var(--accent2); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 22px;
+}
+.section-tag::before { content:''; width: 24px; height: 1px; background: var(--accent2); }
+
+h2.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(44px, 6.5vw, 88px);
+  line-height: 0.92; letter-spacing: 1.5px; color: var(--text); margin-bottom: 20px;
+}
+h2.section-title em {
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  color: var(--text-dim); letter-spacing: 0;
+}
+.section-body {
+  font-size: 17px; color: var(--text-dim); font-weight: 300;
+  line-height: 1.75; max-width: 500px; margin-bottom: 56px;
+}
+
+/* BENTO */
+.bento { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+.bcard {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 36px 32px;
+  position: relative; overflow: hidden;
+  transition: border-color .3s, transform .3s, background .3s;
+}
+.bcard::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.025) 0%, transparent 60%);
+  pointer-events: none;
+}
+.bcard:hover { border-color: var(--border2); background: var(--surface2); transform: translateY(-4px); }
+.bcard.span2 { grid-column: span 2; }
+
+/* border beam */
+.bcard.beam { border-color: transparent; }
+.bcard.beam::after {
+  content: ''; position: absolute; inset: -1px;
+  border-radius: var(--r-lg); padding: 1px;
+  background: conic-gradient(from var(--ba,0deg), transparent 0deg, var(--accent) 60deg, #7c5cfc 120deg, transparent 180deg);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  animation: beamSpin 3s linear infinite;
+}
+@property --ba { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+@keyframes beamSpin { to { --ba: 360deg; } }
+
+.bcard-num { position: absolute; top: 24px; right: 24px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--border2); letter-spacing: 1px; }
+.bcard-icon { font-size: 26px; margin-bottom: 20px; display: block; }
+.bcard-title { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 1px; color: var(--text); margin-bottom: 10px; }
+.bcard-desc { font-size: 14px; color: var(--text-muted); line-height: 1.7; font-weight: 300; }
+
+/* CATEGORIES */
+.cat-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+.cat-item {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 28px 20px 24px; text-align: center;
+  text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 12px;
+  transition: border-color .25s, background .25s, transform .3s;
+  position: relative; overflow: hidden;
+}
+.cat-item::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(59,111,255,0.06), transparent 70%);
+  opacity: 0; transition: opacity .3s;
+}
+.cat-item:hover { border-color: var(--border2); transform: translateY(-5px); }
+.cat-item:hover::before { opacity: 1; }
+.cat-item:hover .cat-icon { transform: scale(1.2) rotate(-4deg); }
+.cat-icon { font-size: 32px; transition: transform .3s; display: block; }
+.cat-name { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); }
+
+/* STEPS */
+.steps-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; position: relative; }
+.steps-grid::before {
+  content: ''; position: absolute;
+  top: 27px; left: 12.5%; right: 12.5%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border2) 20%, var(--border2) 80%, transparent);
+}
+.step-item { padding: 0 16px; text-align: center; }
+.step-dot {
+  width: 54px; height: 54px; border-radius: 50%;
+  border: 1px solid var(--border2); background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 24px; position: relative; z-index: 1;
+  font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--accent2);
+  transition: border-color .3s, box-shadow .3s;
+}
+.step-item:hover .step-dot { border-color: var(--accent); box-shadow: 0 0 20px var(--accent-glow); }
+.step-title { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 1px; color: var(--text); margin-bottom: 8px; }
+.step-desc { font-size: 13px; color: var(--text-muted); line-height: 1.65; font-weight: 300; }
+
+/* TESTIMONIALS MARQUEE */
+.reviews-track-wrap { overflow: hidden; margin-top: 56px; }
+.reviews-track { display: flex; gap: 16px; width: max-content; }
+.reviews-track.fwd  { animation: mq-fwd  42s linear infinite; }
+.reviews-track.back { animation: mq-back 38s linear infinite; margin-top: 16px; }
+.rcard {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 28px; width: 320px; flex-shrink: 0;
+  transition: border-color .25s;
+}
+.rcard:hover { border-color: var(--border2); }
+.rcard-stars { color: var(--gold); font-size: 13px; letter-spacing: 2px; margin-bottom: 14px; }
+.rcard-text { font-size: 14px; color: var(--text-dim); line-height: 1.7; font-family: 'Instrument Serif', serif; font-style: italic; margin-bottom: 20px; }
+.rcard-author { display: flex; align-items: center; gap: 12px; }
+.rcard-av {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--accent-glow); border: 1px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Bebas Neue', sans-serif; font-size: 16px; color: var(--accent2); letter-spacing: 1px;
+}
+.rcard-name { font-size: 13px; font-weight: 500; color: var(--text); }
+.rcard-tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); letter-spacing: 1px; }
+
+/* CTA */
+.cta-section { position: relative; z-index: 1; padding: 130px 48px; text-align: center; overflow: hidden; }
+.cta-grid-bg {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 60% 80% at 50% 50%, black, transparent);
+}
+.cta-glow {
+  position: absolute; width: 500px; height: 500px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(59,111,255,0.1), transparent 65%);
+  top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none;
+}
+.cta-inner { position: relative; max-width: 720px; margin: 0 auto; }
+.cta-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent2); margin-bottom: 24px; display: block; }
+.cta-section p { font-size: 18px; color: var(--text-dim); font-weight: 300; line-height: 1.7; margin-bottom: 44px; }
+.cta-note { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); letter-spacing: 1px; margin-top: 20px; display: block; }
+
+/* SHIMMER */
+.shimmer-text {
+  background: linear-gradient(90deg, var(--text) 0%, var(--text) 38%, var(--accent2) 48%, var(--text) 58%, var(--text) 100%);
+  background-size: 250% auto;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  animation: shimmer 5s linear infinite;
+}
+@keyframes shimmer { to { background-position: 250% center; } }
+
+/* FOOTER */
+footer {
+  position: relative; z-index: 1; border-top: 1px solid var(--border);
+  padding: 40px 48px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
+}
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 2px; color: var(--text); text-decoration: none; }
+.footer-logo span { color: var(--accent2); }
+.footer-links { display: flex; gap: 28px; }
+.footer-links a { font-size: 13px; color: var(--text-muted); text-decoration: none; transition: color .2s; }
+.footer-links a:hover { color: var(--text); }
+.footer-copy { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); letter-spacing: 1px; }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(36px); transition: opacity .75s cubic-bezier(.16,1,.3,1), transform .75s cubic-bezier(.16,1,.3,1); }
+.reveal.in { opacity: 1; transform: translateY(0); }
+.d1 { transition-delay: .08s; } .d2 { transition-delay: .16s; } .d3 { transition-delay: .24s; } .d4 { transition-delay: .32s; }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) { .cat-grid { grid-template-columns: repeat(3,1fr); } }
+@media (max-width: 860px) {
+  nav { padding: 16px 24px; } nav.scrolled { padding: 12px 24px; }
+  .nav-links { display: none; } .hamburger { display: block; }
+  .hero { padding: 120px 24px 70px; }
+  .section { padding: 80px 24px; }
+  .bento { grid-template-columns: 1fr; } .bcard.span2 { grid-column: span 1; }
+  .steps-grid { grid-template-columns: repeat(2,1fr); gap: 32px; } .steps-grid::before { display: none; }
+  .cat-grid { grid-template-columns: repeat(2,1fr); }
+  .cta-section { padding: 90px 24px; }
+  footer { flex-direction: column; align-items: center; text-align: center; padding: 32px 24px; }
+  .footer-links { flex-wrap: wrap; justify-content: center; }
+}
+@media (max-width: 520px) {
+  .hero h1, .hero-sub-line { font-size: 58px; }
+  .hero-stats { gap: 28px; }
+  .steps-grid { grid-template-columns: 1fr; }
+  h2.section-title { font-size: 44px; }
+  .rcard { width: 280px; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-layer">
+  <div class="bg-grid"></div>
+  <div class="bg-radial" id="bgRadial"></div>
+  <div class="bg-mask"></div>
+</div>
+
+<div class="scroll-progress" id="sprogress"></div>
+<div class="cursor-dot" id="cdot"></div>
+<div class="cursor-ring" id="cring"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">MIRO<span>Y</span>TENGO</a>
+  <ul class="nav-links">
+    <li><a href="#ventajas">Ventajas</a></li>
+    <li><a href="#categorias">Categorías</a></li>
+    <li><a href="#como-funciona">Cómo funciona</a></li>
+    <li><a href="#opiniones">Opiniones</a></li>
+  </ul>
+  <a href="https://miroytengo.es" target="_blank" class="nav-cta">VER CATÁLOGO →</a>
+  <button class="hamburger" id="hamburger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Disponible en toda España · Entrega en 48h</div>
+  <h1>MUEBLES QUE</h1>
+  <div class="hero-sub-line">NO TE <em>arruinan</em></div>
+  <h1 class="last">LA CUENTA.</h1>
+  <p class="hero-desc">
+    Más de <strong>2.700 productos en stock</strong> ahora mismo.<br>
+    Sin esperar semanas. Sin letra pequeña.<br>
+    Sin excusas para seguir viviendo con lo de antes.
+  </p>
+  <div class="hero-actions">
+    <a href="https://miroytengo.es" target="_blank" class="btn-main">VER CATÁLOGO COMPLETO →</a>
+    <a href="#como-funciona" class="btn-ghost">¿CÓMO FUNCIONA?</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-n" data-target="2700" data-suffix="+">0</span>
+      <span class="stat-l">Productos · Stock</span>
+    </div>
+    <div class="stat">
+      <span class="stat-n" data-target="48" data-suffix="H">0H</span>
+      <span class="stat-l">Entrega · Media</span>
+    </div>
+    <div class="stat">
+      <span class="stat-n" data-target="4.7" data-suffix="★" data-float="1">0★</span>
+      <span class="stat-l">Valoración · Media</span>
+    </div>
+    <div class="stat">
+      <span class="stat-n" data-target="100" data-suffix="K+">0</span>
+      <span class="stat-l">Clientes · Satisfechos</span>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-row fwd" id="mq1"></div>
+  <div class="marquee-row back" id="mq2"></div>
+</div>
+
+<!-- FEATURES -->
+<section class="section" id="ventajas">
+  <div class="container">
+    <span class="section-tag reveal">Por qué Miroytengo</span>
+    <h2 class="section-title reveal d1">TODO LO QUE<br>NECESITAS.<br><em class="shimmer-text">Nada más.</em></h2>
+    <p class="section-body reveal d2">No somos el típico e-commerce con fotos bonitas y plazos de entrega de película de ciencia ficción. Somos la opción que tiene sentido.</p>
+    <div class="bento">
+      <div class="bcard span2 beam reveal">
+        <span class="bcard-num">01</span>
+        <span class="bcard-icon">⚡</span>
+        <div class="bcard-title">ENTREGA EN 48 HORAS</div>
+        <div class="bcard-desc">Más del 80% de los pedidos salen de almacén en 48h. No es marketing. Pasado mañana en tu puerta. Si vives en España, llega.</div>
+      </div>
+      <div class="bcard reveal d1">
+        <span class="bcard-num">02</span>
+        <span class="bcard-icon">📦</span>
+        <div class="bcard-title">STOCK REAL</div>
+        <div class="bcard-desc">+2.700 referencias disponibles ahora mismo. No en 8 semanas. No "bajo pedido". Ahora.</div>
+      </div>
+      <div class="bcard reveal d1">
+        <span class="bcard-num">03</span>
+        <span class="bcard-icon">💶</span>
+        <div class="bcard-title">PRECIO JUSTO</div>
+        <div class="bcard-desc">Sin rebajas eternas falsas. Sin precios inflados de salida. Lo que ves es lo que pagas.</div>
+      </div>
+      <div class="bcard reveal d2">
+        <span class="bcard-num">04</span>
+        <span class="bcard-icon">🏠</span>
+        <div class="bcard-title">SUBIDA A DOMICILIO</div>
+        <div class="bcard-desc">Para que no tengas que llamar a tu cuñado el sábado por la mañana. Disponible al contratar.</div>
+      </div>
+      <div class="bcard span2 reveal d2">
+        <span class="bcard-num">05</span>
+        <span class="bcard-icon">🎯</span>
+        <div class="bcard-title">ATENCIÓN QUE FUNCIONA DE VERDAD</div>
+        <div class="bcard-desc">Personas reales. Respuestas reales. Sin chatbots en bucle infinito ni formularios que se pierden en el vacío.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="section alt" id="categorias">
+  <div class="container">
+    <span class="section-tag reveal">Qué encontrarás</span>
+    <h2 class="section-title reveal d1">CADA RINCÓN<br>DE TU <em>casa.</em></h2>
+    <p class="section-body reveal d2">Salón, dormitorio, cocina, baño, juvenil, infantil. Si lo necesitas para vivir, lo tenemos.</p>
+    <div class="cat-grid">
+      <a href="https://miroytengo.es/233-muebles-modernos-de-salon-conjuntos" target="_blank" class="cat-item reveal">
+        <span class="cat-icon">🛋️</span><span class="cat-name">Salón & Comedor</span>
+      </a>
+      <a href="https://miroytengo.es/174-dormitorios-de-matrimonio-modernos" target="_blank" class="cat-item reveal d1">
+        <span class="cat-icon">🛏️</span><span class="cat-name">Dormitorio</span>
+      </a>
+      <a href="https://miroytengo.es/156-habitaciones-juveniles-completas-modernas" target="_blank" class="cat-item reveal d2">
+        <span class="cat-icon">🎮</span><span class="cat-name">Juvenil & Gaming</span>
+      </a>
+      <a href="https://miroytengo.es/378-camas-infantiles" target="_blank" class="cat-item reveal d3">
+        <span class="cat-icon">🧸</span><span class="cat-name">Infantil</span>
+      </a>
+      <a href="https://miroytengo.es" target="_blank" class="cat-item reveal">
+        <span class="cat-icon">🛁</span><span class="cat-name">Baño</span>
+      </a>
+      <a href="https://miroytengo.es" target="_blank" class="cat-item reveal d1">
+        <span class="cat-icon">🍳</span><span class="cat-name">Cocina</span>
+      </a>
+      <a href="https://miroytengo.es" target="_blank" class="cat-item reveal d2">
+        <span class="cat-icon">💼</span><span class="cat-name">Despacho</span>
+      </a>
+      <a href="https://miroytengo.es" target="_blank" class="cat-item reveal d3">
+        <span class="cat-icon">🌿</span><span class="cat-name">Jardín & Terraza</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="como-funciona">
+  <div class="container">
+    <span class="section-tag reveal">El proceso</span>
+    <h2 class="section-title reveal d1">SIMPLE.<br>SIN <em>historias.</em></h2>
+    <p class="section-body reveal d2">Cuatro pasos desde que ves algo que te gusta hasta que lo tienes en tu casa.</p>
+    <div class="steps-grid">
+      <div class="step-item reveal">
+        <div class="step-dot">01</div>
+        <div class="step-title">ELIGE</div>
+        <div class="step-desc">Navega el catálogo. Filtra por habitación, precio o estilo. Sin agobios ni pop-ups.</div>
+      </div>
+      <div class="step-item reveal d1">
+        <div class="step-dot">02</div>
+        <div class="step-title">PAGA SEGURO</div>
+        <div class="step-desc">Tarjeta, transferencia, Bizum. SSL. Sin sorpresas al finalizar la compra.</div>
+      </div>
+      <div class="step-item reveal d2">
+        <div class="step-dot">03</div>
+        <div class="step-title">RECIBE EN 48H</div>
+        <div class="step-desc">Te avisamos del seguimiento. Sin ventanas de entrega de 8h que te obligan a quedarte en casa.</div>
+      </div>
+      <div class="step-item reveal d3">
+        <div class="step-dot">04</div>
+        <div class="step-title">DISFRUTA</div>
+        <div class="step-desc">Estrena habitación. Que tus visitas pregunten de dónde es. Vive mejor por menos.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section alt" id="opiniones">
+  <div class="container">
+    <span class="section-tag reveal">Opiniones reales</span>
+    <h2 class="section-title reveal d1">LO DICEN<br><em>ellos,</em> no nosotros.</h2>
+  </div>
+  <div class="reviews-track-wrap reveal d2">
+    <div class="reviews-track fwd" id="rt1"></div>
+    <div class="reviews-track back" id="rt2"></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-grid-bg"></div>
+  <div class="cta-glow"></div>
+  <div class="cta-inner">
+    <span class="cta-label reveal">La decisión fácil</span>
+    <h2 class="section-title reveal d1">TU CASA NO VA A<br>AMUEBLARSE <em>sola.</em></h2>
+    <p class="reveal d2">Más de 2.700 productos esperándote. Entrega en 48h. Precios sin trampa. ¿A qué estás esperando?</p>
+    <div class="hero-actions reveal d3" style="justify-content:center">
+      <a href="https://miroytengo.es" target="_blank" class="btn-main" style="font-size:14px;padding:17px 36px">VER CATÁLOGO AHORA →</a>
+    </div>
+    <span class="cta-note reveal d4">Sin suscripciones · Sin letra pequeña · Solo muebles</span>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="footer-logo">MIRO<span>Y</span>TENGO</a>
+  <nav class="footer-links">
+    <a href="https://miroytengo.es" target="_blank">Catálogo</a>
+    <a href="https://miroytengo.es" target="_blank">Envíos</a>
+    <a href="https://miroytengo.es" target="_blank">Contacto</a>
+    <a href="https://miroytengo.es" target="_blank">Privacidad</a>
+  </nav>
+  <span class="footer-copy">© 2025 · MIROYTENGO.ES</span>
+</footer>
+
+<script>
+/* ─ MARQUEE DATA ─ */
+const mqItems1 = ['Entrega +80% en 48h','Subida a domicilio','Stock inmediato','Envío desde España','Pago seguro','2.700+ referencias','Atención personalizada','Sin letra pequeña','Devolución fácil'];
+const mqItems2 = ['Salón · Dormitorio · Baño','Juvenil · Infantil · Gaming','Cocina · Despacho · Jardín','Mesas · Sofás · Armarios','Camas · Estanterías · Sillas','Precios sin trampa','100K+ clientes satisfechos'];
+
+function buildMq(id, items) {
+  const el = document.getElementById(id);
+  const doubled = [...items, ...items];
+  el.innerHTML = doubled.map(t => `<div class="mq-item"><span class="dot"></span>${t}</div>`).join('');
+}
+buildMq('mq1', mqItems1);
+buildMq('mq2', mqItems2);
+
+/* ─ REVIEWS ─ */
+const reviews = [
+  {stars:'★★★★★',text:'Pedí un conjunto de dormitorio y llegó en 2 días. Montaje sencillo y quedó exactamente como en la foto. Repetiremos sin duda.',init:'M',name:'María G.',tag:'DORMITORIO · MADRID'},
+  {stars:'★★★★★',text:'Buscaba muebles de salón a buen precio sin que parecieran baratos. Acerté de pleno. La calidad supera lo que esperaba.',init:'J',name:'Javier P.',tag:'SALÓN · BARCELONA'},
+  {stars:'★★★★☆',text:'El servicio de subida a domicilio lo vale. Cuarto piso sin ascensor y lo subieron sin problema. Muy recomendable.',init:'A',name:'Ana R.',tag:'ARMARIO · SEVILLA'},
+  {stars:'★★★★★',text:'Todo llegó perfecto, bien embalado y antes de lo esperado. El precio-calidad es difícil de superar. Ya hice un segundo pedido.',init:'C',name:'Carlos M.',tag:'COMEDOR · VALENCIA'},
+  {stars:'★★★★★',text:'Llevaba meses buscando una cama juvenil que no costara un riñón. La encontré aquí y llegó en día y medio. Impresionante.',init:'L',name:'Laura F.',tag:'JUVENIL · ZARAGOZA'},
+  {stars:'★★★★★',text:'Atención al cliente excelente. Tuve una duda con las medidas y me respondieron en menos de una hora. Así da gusto comprar online.',init:'D',name:'Diego H.',tag:'ESTANTERÍA · BILBAO'},
+  {stars:'★★★★☆',text:'Precio imbatible para la calidad que ofrecen. El montaje podría venir algo más detallado, pero nada grave.',init:'S',name:'Sara L.',tag:'SALÓN · MÁLAGA'},
+  {stars:'★★★★★',text:'Ya voy por el tercer pedido. Muebles para toda la casa y en todos los casos la experiencia ha sido perfecta.',init:'P',name:'Pablo V.',tag:'VARIOS · GRANADA'},
+];
+
+function buildReviews(id, items) {
+  const el = document.getElementById(id);
+  const doubled = [...items, ...items];
+  el.innerHTML = doubled.map(r => `
+    <div class="rcard">
+      <div class="rcard-stars">${r.stars}</div>
+      <p class="rcard-text">"${r.text}"</p>
+      <div class="rcard-author">
+        <div class="rcard-av">${r.init}</div>
+        <div>
+          <div class="rcard-name">${r.name}</div>
+          <div class="rcard-tag">${r.tag}</div>
+        </div>
+      </div>
+    </div>`).join('');
+}
+buildReviews('rt1', reviews);
+buildReviews('rt2', [...reviews].reverse());
+
+/* ─ CURSOR ─ */
+const dot = document.getElementById('cdot');
+const ring = document.getElementById('cring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => {
+  mx=e.clientX; my=e.clientY;
+  dot.style.left=mx+'px'; dot.style.top=my+'px';
+  document.documentElement.style.setProperty('--mx', mx+'px');
+  document.documentElement.style.setProperty('--my', my+'px');
+});
+(function animRing(){
+  rx+=(mx-rx)*.1; ry+=(my-ry)*.1;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(animRing);
+})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ ring.style.width='44px'; ring.style.height='44px'; ring.style.borderColor='var(--accent2)'; });
+  el.addEventListener('mouseleave',()=>{ ring.style.width='28px'; ring.style.height='28px'; ring.style.borderColor='rgba(255,255,255,0.3)'; });
+});
+
+/* ─ SCROLL ─ */
+const nav = document.getElementById('nav');
+const sp  = document.getElementById('sprogress');
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY/(document.body.scrollHeight-window.innerHeight)*100;
+  sp.style.width = pct+'%';
+  nav.classList.toggle('scrolled', window.scrollY>60);
+},{passive:true});
+
+/* ─ REVEAL ─ */
+const revEls = document.querySelectorAll('.reveal');
+const ro = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); } });
+},{threshold:0.1,rootMargin:'0px 0px -30px 0px'});
+revEls.forEach(el=>ro.observe(el));
+
+/* ─ COUNTERS ─ */
+function animCount(el, target, suffix, isFloat) {
+  let start=null; const dur=1800;
+  (function step(ts){
+    if(!start) start=ts;
+    const p=Math.min((ts-start)/dur,1);
+    const ease=1-Math.pow(1-p,3);
+    const val=isFloat?(ease*target).toFixed(1):Math.floor(ease*target);
+    el.textContent=val+suffix;
+    if(p<1) requestAnimationFrame(step);
+  })(performance.now());
+}
+const statsSection = document.querySelector('.hero-stats');
+if(statsSection){
+  let fired=false;
+  new IntersectionObserver(entries=>{
+    if(entries[0].isIntersecting && !fired){
+      fired=true;
+      document.querySelectorAll('[data-target]').forEach(el=>{
+        animCount(el, parseFloat(el.dataset.target), el.dataset.suffix||'', !!el.dataset.float);
+      });
+    }
+  },{threshold:.5}).observe(statsSection);
+}
+</script>
+</body>
+</html>
